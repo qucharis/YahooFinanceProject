@@ -1,0 +1,5 @@
+create table stocks
+(
+companyname varchar2(30) primary key,
+numofavaliable number(10) not null
+);
