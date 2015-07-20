@@ -46,7 +46,4 @@ public class Transaction {
 	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
 	}
-	
-	
-
 }
