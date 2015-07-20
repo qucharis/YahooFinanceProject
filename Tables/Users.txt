@@ -1,0 +1,10 @@
+create table users
+(userid number(5),
+username varchar2(20) not null,
+password varchar2(20) not null,
+email varchar2(40) not null,
+balance decimal(10,2) not null,
+authority varchar2(20) not null,
+enabled number(1) not null,
+constraint users_pk primary key (userid)
+);

@@ -1,5 +1,6 @@
 create table stocks
 (
-companyname varchar2(30) primary key,
-numofavaliable number(10) not null
+sid number(5) primary key,
+scode varchar2(10) not null,
+stockname varchar2(30) not null
 );
