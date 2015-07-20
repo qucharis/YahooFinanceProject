@@ -1,0 +1,9 @@
+create table owns
+(
+username varchar2(20),
+companyname varchar2(30),
+quantity number(10) not null,
+constraint owns_pk primary key(username, companyname),
+constraint owns_username_fk foreign key(username) references traders(username),
+constraint owns_companyname_fk foreign key(companyname) references stocks(companyname)
+);

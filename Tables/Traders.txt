@@ -1,0 +1,9 @@
+create table traders
+(
+username varchar2(20) primary key,
+password varchar2(20) not null,
+email varchar2(30) not null,
+balance decimal(10,2) not null,
+authority varchar2(20) not null,
+enabled number(1) not null
+);

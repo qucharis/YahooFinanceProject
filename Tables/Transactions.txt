@@ -1,0 +1,13 @@
+create table transactions
+(
+transID number(10) primary key,
+username varchar2(20) not null,
+companyname varchar2(30) not null,
+buyorsell number(1) not null,
+quantity number(10) not null,
+unitprice decimal(10,2) not null,
+totalprice decimal(10,2) not null,
+transtime timestamp not null,
+constraint transactions_username_fk foreign key (username) references traders(username),
+constraint transactions_companyname_fk foreign key(companyname) references stocks(companyname)
+);
