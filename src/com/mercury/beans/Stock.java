@@ -9,7 +9,7 @@ public class Stock {
 	private Set<User> buyers;
 	
 	public Stock() {
-		this.buyer = new HashSet<User>();
+		this.buyers = new HashSet<User>();
 	}
 	public Stock(int sid, String stockName) {
 		this();
