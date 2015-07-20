@@ -1,0 +1,11 @@
+create table trade_history
+(
+transid number(10) primary key,
+userid number(5) not null,
+sid number(5) not null,
+amount number(10) not null,
+unitprice decimal(10,2) not null,
+transtime timestamp not null,
+constraint trade_history_userid_fk foreign key (userid) references users(userid),
+constraint trade_history_sid_fk foreign key(sid) references stocks(sid)
+);
