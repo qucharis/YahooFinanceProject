@@ -5,8 +5,10 @@ import java.util.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -98,12 +100,14 @@ public class User {
 		this.transactions = transactions;
 	}
 	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userId")
 	public Set<Ownership> getOwnerships() {
 		return ownerships;
 	}
 	public void setOwnerships(Set<Ownership> ownerships) {
 		this.ownerships = ownerships;
 	}
+	
 	public void addOwnership(Ownership ownership) {
 		ownerships.add(ownership);
 	}
