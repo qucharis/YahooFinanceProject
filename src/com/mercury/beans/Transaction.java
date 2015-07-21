@@ -3,31 +3,51 @@ package com.mercury.beans;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="trade_history")
 public class Transaction {
 	private int transid;
+	private User user;
+	private Stock stock;
 	private int userid;
 	private int sid;
 	private int amount;
 	private BigDecimal unitprice;
 	private Timestamp timestamp;
+	
+	@Id
+	@GeneratedValue(generator = "generator")
+	@GenericGenerator(name ="generator", strategy = "increment")
+	@Column(name="transid")
 	public int getTransid() {
 		return transid;
 	}
 	public void setTransid(int transid) {
 		this.transid = transid;
 	}
-	public int getUserid() {
-		return userid;
+	
+	
+	public User getUser() {
+		return user;
 	}
-	public void setUserid(int userid) {
-		this.userid = userid;
+	public void setUser(User user) {
+		this.user = user;
 	}
-	public int getSid() {
-		return sid;
+	public Stock getStock() {
+		return stock;
 	}
-	public void setSid(int sid) {
-		this.sid = sid;
+	public void setStock(Stock stock) {
+		this.stock = stock;
 	}
+	
 	public int getAmount() {
 		return amount;
 	}
