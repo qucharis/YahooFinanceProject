@@ -6,10 +6,10 @@ public class Stock {
 	private int sid;
 	private String scode;
 	private String stockName;
-	private Set<OwnerShip> ownerships;
+	private Set<Ownership> ownerships;
 	
 	public Stock() {
-		ownerships = new HashSet<OwnerShip>();
+		ownerships = new HashSet<Ownership>();
 	}
 	public Stock(String stockName, String scode) {
 		this();
@@ -34,19 +34,19 @@ public class Stock {
 	public void setStockName(String stockName) {
 		this.stockName = stockName;
 	}
-	public Set<OwnerShip> getOwnerships() {
+	public Set<Ownership> getOwnerships() {
 		return ownerships;
 	}
-	public void setOwnerships(Set<OwnerShip> ownerships) {
+	public void setOwnerships(Set<Ownership> ownerships) {
 		this.ownerships = ownerships;
 	}
 	public String toString() {
 		return scode + ": " + stockName;
 	}
-	public void addOwnership(OwnerShip ownership) {
+	public void addOwnership(Ownership ownership) {
 		ownerships.add(ownership);
 	}
-	public void removeOwnership(OwnerShip ownership) {
+	public void removeOwnership(Ownership ownership) {
 		ownerships.remove(ownership);
 	}
 }

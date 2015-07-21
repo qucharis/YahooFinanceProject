@@ -1,6 +1,6 @@
 package com.mercury.beans;
 
-public class OwnerShip {
+public class Ownership {
 	
 	private User user;
 	private Stock stock;
