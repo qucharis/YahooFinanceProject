@@ -47,13 +47,19 @@ public class TransactionDaoImpl implements TransactionDao {
 	}
 
 	@Override
-	public TransactionInfo queryTrans(Date date, User user) {
+	public TransactionInfo queryTrans(Date date, Stock stock) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void deleteTrans(Transaction transaction) {
+	public TransactionInfo queryTrans(User user, Date date, Stock stock) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteTrans(Transaction trans) {
 		// TODO Auto-generated method stub
 
 	}

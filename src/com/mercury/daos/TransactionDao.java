@@ -14,8 +14,9 @@ public interface TransactionDao {
 	public TransactionInfo queryTrans(Stock stock);
 	public TransactionInfo queryTrans(User user, Date date);
 	public TransactionInfo queryTrans(User user, Stock stock);
-	public TransactionInfo queryTrans(Date date,User user);
-	public void deleteTrans(Transaction transaction);
+	public TransactionInfo queryTrans(Date date, Stock stock);
+	public TransactionInfo queryTrans(User user,Date date,Stock stock);
+	public void deleteTrans(Transaction trans);
 	public void deleteTrans(User user);
 	public void deleteTrans(Stock stock);
 	public void deleteTrans(User user,Stock stock);
