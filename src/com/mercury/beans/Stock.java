@@ -2,6 +2,12 @@ package com.mercury.beans;
 
 import java.util.*;
 
+import javax.persistence.*;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="stocks")
 public class Stock {
 	private int sid;
 	private String scode;
@@ -16,24 +22,31 @@ public class Stock {
 		this.stockName = stockName;
 		this.scode = scode;
 	}
+	@Id
+	@GeneratedValue(generator = "generator")
+	@GenericGenerator(name ="generator", strategy = "increment")
+	@Column(name="sid")
 	public int getSid() {
 		return sid;
 	}
 	public void setSid(int sid) {
 		this.sid = sid;
 	}
+	@Column(name="scode")
 	public String getScode() {
 		return scode;
 	}
 	public void setScode(String scode) {
 		this.scode = scode;
 	}
+	@Column(name="stockname")
 	public String getStockName() {
 		return stockName;
 	}
 	public void setStockName(String stockName) {
 		this.stockName = stockName;
 	}
+	@OneToMany(mappedBy="stocks")
 	public Set<Ownership> getOwnerships() {
 		return ownerships;
 	}
