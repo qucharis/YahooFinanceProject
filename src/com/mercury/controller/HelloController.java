@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mercury.beans.Ownership;
 import com.mercury.beans.Stock;
 import com.mercury.beans.User;
 import com.mercury.daos.StockDao;
@@ -56,14 +57,20 @@ public class HelloController {
 	public String mainPage() {	
 		
 		Stock stock = new Stock("google", "goo");
-		sd.addStock(stock);
+		//sd.addStock(stock);
 		
 		User user = new User(10000,"qwer","123","abc@gmail.com",new BigDecimal(10),"admin",0);
 	
 		td.addUser(user);
 		
+		///Ownership ownership = new Ownership();
+		///ownership.setQuantity(10);
+		///ownership.setStock(stock);
+		///stock.addOwnership(ownership);
+		sd.addStock(stock);
+		Stock stock1 = sd.getStockByStockID(2);
 		
-		return "hello";
+		return stock1.getScode() + stock1.getStockName();
 	}
 	
 }

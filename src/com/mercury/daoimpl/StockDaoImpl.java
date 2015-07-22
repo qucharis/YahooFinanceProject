@@ -29,9 +29,11 @@ public class StockDaoImpl implements StockDao {
 	
 	@Override
 	public Stock getStockByStockID(int sid) {
+		/*
 		String hql = "from Stock as stock where stock.sid=" + sid;
 		@SuppressWarnings("unchecked")
 		List<Stock> stock = template.find(hql);
-		return stock.get(0);
+		return stock.get(0);*/
+		return (Stock)template.load(Stock.class, sid);
 	}
 }
