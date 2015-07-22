@@ -9,6 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name="stocks")
 public class Stock {
+
 	private int sid;
 	private String scode;
 	private String stockName;
@@ -23,8 +24,11 @@ public class Stock {
 		this.scode = scode;
 	}
 	@Id
-	@GeneratedValue(generator = "generator")
-	@GenericGenerator(name ="generator", strategy = "increment")
+	@GeneratedValue(generator = "stock_id_gen", 
+    strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "stock_id_gen", 
+       sequenceName = "seq_stoc_sid", 
+       allocationSize = 1)
 	@Column(name="sid")
 	public int getSid() {
 		return sid;
@@ -46,7 +50,7 @@ public class Stock {
 	public void setStockName(String stockName) {
 		this.stockName = stockName;
 	}
-	@OneToMany(mappedBy="stocks")
+	@OneToMany(mappedBy="stock")
 	public Set<Ownership> getOwnerships() {
 		return ownerships;
 	}

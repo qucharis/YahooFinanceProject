@@ -9,6 +9,7 @@ import com.mercury.beans.*;
 import com.mercury.daos.StockDao;
 
 public class StockDaoImpl implements StockDao {
+	
 	private HibernateTemplate template;
 	
 	public void setSessionFactory(SessionFactory sessionFactory) {
