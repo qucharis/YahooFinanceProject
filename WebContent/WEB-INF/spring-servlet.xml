@@ -20,8 +20,12 @@
     </bean>
     <bean id="helloController" class="com.mercury.controller.HelloController">
     	<property name="td" ref="TransactionDao"/>
+    	<property name="sd" ref="StockDao"/>
     </bean>
     <bean id="TransactionDao" class="com.mercury.daoimpl.TransactionDaoImpl">
+    	<property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="StockDao" class="com.mercury.daoimpl.StockDaoImpl">
     	<property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     
@@ -38,6 +42,9 @@
 		<property name="annotatedClasses">	<!-- annotation -->
 			<list>
 				<value>com.mercury.beans.User</value>
+				<value>com.mercury.beans.Stock</value>
+				<value>com.mercury.beans.Ownership</value>
+				<value>com.mercury.beans.Transaction</value>
 			</list>
     	</property>
 		<property name="hibernateProperties">
