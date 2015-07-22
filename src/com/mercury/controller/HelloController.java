@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mercury.beans.Transaction;
-import com.mercury.beans.User;
 import com.mercury.daos.StockDao;
 import com.mercury.daos.TransactionDao;
 import com.mercury.daos.UserDao;
@@ -22,7 +21,6 @@ public class HelloController {
 	private TransactionDao td;
 	@Autowired
 	private StockDao sd;
-
 	@Autowired
 	private UserDao ud;
 
@@ -83,22 +81,21 @@ public class HelloController {
 		td.addTrans(tran);*/
 
 		//User user = new User(10000,"qwer","123","abc@gmail.com",new BigDecimal(10),"admin",0);
+		String opStr = new String();
 		
-		User user1 = ud.getUserById(1);
-		System.out.println(user1.getUserId() + user1.getUserName() + user1.getPassword());
+		/*User user1 = ud.getUserById(16);
+		opStr = user1.getUserId() + user1.getUserName() + user1.getPassword() +"<br/>";*/
 
 		
 		Set<Transaction> set = td.queryTransAll();
-		System.out.println("*****************");
 		for(Transaction t:set){
-			System.out.println(t.getAmount()+";"+t.getTransid()+";"+t.getTimestamp()+";"+t.getUnitprice());
+			opStr = opStr+(t.getAmount()+";"+t.getTransid()+";"+t.getTimestamp()+";"+t.getUnitprice())+"<br/>";			
+			opStr = opStr+t.getStock().toString()+"<br/>";
+			opStr = opStr+t.getUser().getUserName() +":"+t.getUser().getPassword()+"<br/>";
+			
+			opStr = opStr+"<br/><br/>";
 		}
-		System.out.println("StockNames*******");
-		for(Transaction t:set){
-			System.out.println(t.getStock().toString());
-			System.out.println(t.getUser().getUserName() +":"+t.getUser().getPassword());
-		}
-		return "hello";
+		return opStr;
 	}
 	
 }
