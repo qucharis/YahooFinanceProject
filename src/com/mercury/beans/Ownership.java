@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -69,6 +71,7 @@ public class Ownership {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userid", nullable = false)
+	@Cascade(CascadeType.SAVE_UPDATE)
 	public User getUser() {
 		return user;
 	}
@@ -78,6 +81,7 @@ public class Ownership {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "sid", nullable = false)
+	@Cascade(CascadeType.SAVE_UPDATE)
 	public Stock getStock() {
 		return stock;
 	}

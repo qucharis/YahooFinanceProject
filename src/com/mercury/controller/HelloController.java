@@ -24,8 +24,35 @@ public class HelloController {
 	private TransactionDao td;
 	@Autowired
 	private StockDao sd;
+<<<<<<< HEAD
 	@Autowired
 	private UserDao ud;
+=======
+	private UserDao ud;
+	public UserDao getUd() {
+		return ud;
+	}
+
+	public void setUd(UserDao ud) {
+		this.ud = ud;
+	}
+
+	public TransactionDao getTd() {
+		return td;
+	}
+
+	public void setTd(TransactionDao td) {
+		this.td = td;
+	}
+	
+	public StockDao getSd() {
+		return sd;
+	}
+
+	public void setSd(StockDao sd) {
+		this.sd = sd;
+	}
+>>>>>>> pr/18
 	
 /*	@RequestMapping(value="/hello", method=RequestMethod.POST)
 	public ModelAndView process(@ModelAttribute("user") 
@@ -53,10 +80,17 @@ public class HelloController {
 		/*Stock stock = new Stock("yahoo", "yo");
 		sd.addStock(stock);
 		
+<<<<<<< HEAD
 		User user = new User(10000,"qwer","123","abc@gmail.com",new BigDecimal(10),"admin",0);
 		ud.save(user);
 		Transaction tran = new Transaction(user,stock);
 		td.addTrans(tran);*/
+=======
+		//User user = new User(10000,"qwer","123","abc@gmail.com",new BigDecimal(10),"admin",0);
+		
+		User user1 = ud.getUserById(1);
+		System.out.println(user1.getUserId() + user1.getUserName() + user1.getPassword());
+>>>>>>> pr/18
 		
 		Set<Transaction> set = td.queryTransAll();
 		System.out.println("*****************");

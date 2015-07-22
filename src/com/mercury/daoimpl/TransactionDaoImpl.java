@@ -8,6 +8,10 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import com.mercury.beans.Stock;
 import com.mercury.beans.Transaction;
+<<<<<<< HEAD
+=======
+
+>>>>>>> pr/18
 import com.mercury.beans.User;
 import com.mercury.daos.TransactionDao;
 
