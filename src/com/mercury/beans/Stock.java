@@ -50,7 +50,7 @@ public class Stock {
 	public void setStockName(String stockName) {
 		this.stockName = stockName;
 	}
-	@OneToMany(mappedBy="stock")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="stock")
 	public Set<Ownership> getOwnerships() {
 		return ownerships;
 	}

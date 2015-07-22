@@ -63,12 +63,12 @@ public class HelloController {
 	
 		td.addUser(user);
 		
-		Ownership ownership = new Ownership();
-		ownership.setQuantity(10);
-		ownership.setStock(stock);
-		stock.addOwnership(ownership);
+		///Ownership ownership = new Ownership();
+		///ownership.setQuantity(10);
+		///ownership.setStock(stock);
+		///stock.addOwnership(ownership);
 		sd.addStock(stock);
-		Stock stock1 = sd.getStockByStockID(2);
+		Stock stock1 = sd.getStockByStockID(4);
 		
 		return stock1.getScode() + stock1.getStockName();
 	}
