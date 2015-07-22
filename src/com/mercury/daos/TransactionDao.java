@@ -6,7 +6,6 @@ import java.util.HashSet;
 
 import com.mercury.beans.Stock;
 import com.mercury.beans.Transaction;
-import com.mercury.beans.TransactionInfo;
 import com.mercury.beans.User;
 
 public interface TransactionDao {

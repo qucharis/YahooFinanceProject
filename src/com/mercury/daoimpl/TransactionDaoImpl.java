@@ -12,7 +12,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.mercury.beans.Stock;
 import com.mercury.beans.Transaction;
-import com.mercury.beans.TransactionInfo;
+
 import com.mercury.beans.User;
 import com.mercury.daos.TransactionDao;
 

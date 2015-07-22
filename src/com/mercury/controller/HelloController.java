@@ -12,12 +12,22 @@ import com.mercury.beans.Stock;
 import com.mercury.beans.User;
 import com.mercury.daos.StockDao;
 import com.mercury.daos.TransactionDao;
+import com.mercury.daos.UserDao;
 
 @Controller
 @SessionAttributes
 public class HelloController {
 	private TransactionDao td;
 	private StockDao sd;
+	private UserDao ud;
+	public UserDao getUd() {
+		return ud;
+	}
+
+	public void setUd(UserDao ud) {
+		this.ud = ud;
+	}
+
 	public TransactionDao getTd() {
 		return td;
 	}
@@ -58,10 +68,10 @@ public class HelloController {
 		Stock stock = new Stock("google", "goo");
 		sd.addStock(stock);
 		
-		User user = new User(10000,"qwer","123","abc@gmail.com",new BigDecimal(10),"admin",0);
-	
-		td.addUser(user);
+		//User user = new User(10000,"qwer","123","abc@gmail.com",new BigDecimal(10),"admin",0);
 		
+		User user1 = ud.getUserById(1);
+		System.out.println(user1.getUserId() + user1.getUserName() + user1.getPassword());
 		
 		return "hello";
 	}
