@@ -18,16 +18,9 @@
         <property name="prefix" value="/WEB-INF/pages/" />
         <property name="suffix" value=".jsp" />
     </bean>
-<<<<<<< HEAD
-    <bean id="helloController" class="com.mercury.controller.HelloController"/>
-=======
     
-    <bean id="helloController" class="com.mercury.controller.HelloController">
-    	<property name="td" ref="TransactionDao"/>
-    	<property name="sd" ref="StockDao"/>
-    	<property name="ud" ref="UserDao"/>
-    </bean>
->>>>>>> pr/18
+    <bean id="helloController" class="com.mercury.controller.HelloController"/>
+
     
     <bean id="TransactionDao" class="com.mercury.daoimpl.TransactionDaoImpl">
     	<property name="sessionFactory" ref="sessionFactory"/>
@@ -38,10 +31,7 @@
     <bean id="UserDao" class="com.mercury.daoimpl.UserDaoImpl">
     	<property name="sessionFactory" ref="sessionFactory"/>
     </bean>
-<<<<<<< HEAD
     
-=======
->>>>>>> pr/18
     
     <!-- Define Daos -->
     <!--  

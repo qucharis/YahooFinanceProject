@@ -1,6 +1,5 @@
 package com.mercury.controller;
 
-import java.math.BigDecimal;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mercury.beans.Stock;
 import com.mercury.beans.Transaction;
 import com.mercury.beans.User;
 import com.mercury.daos.StockDao;
@@ -24,11 +22,10 @@ public class HelloController {
 	private TransactionDao td;
 	@Autowired
 	private StockDao sd;
-<<<<<<< HEAD
+
 	@Autowired
 	private UserDao ud;
-=======
-	private UserDao ud;
+
 	public UserDao getUd() {
 		return ud;
 	}
@@ -52,7 +49,6 @@ public class HelloController {
 	public void setSd(StockDao sd) {
 		this.sd = sd;
 	}
->>>>>>> pr/18
 	
 /*	@RequestMapping(value="/hello", method=RequestMethod.POST)
 	public ModelAndView process(@ModelAttribute("user") 
@@ -80,17 +76,17 @@ public class HelloController {
 		/*Stock stock = new Stock("yahoo", "yo");
 		sd.addStock(stock);
 		
-<<<<<<< HEAD
+
 		User user = new User(10000,"qwer","123","abc@gmail.com",new BigDecimal(10),"admin",0);
 		ud.save(user);
 		Transaction tran = new Transaction(user,stock);
 		td.addTrans(tran);*/
-=======
+
 		//User user = new User(10000,"qwer","123","abc@gmail.com",new BigDecimal(10),"admin",0);
 		
 		User user1 = ud.getUserById(1);
 		System.out.println(user1.getUserId() + user1.getUserName() + user1.getPassword());
->>>>>>> pr/18
+
 		
 		Set<Transaction> set = td.queryTransAll();
 		System.out.println("*****************");
