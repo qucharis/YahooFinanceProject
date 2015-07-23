@@ -13,7 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+//import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="Users")
@@ -37,9 +39,8 @@ public class User {
 		this.userName = userName;
 		this.password = password;
 	}
-	public User(int userId, String userName, String password, String email, BigDecimal balance, String authority, int enable) {
+	public User(String userName, String password, String email, BigDecimal balance, String authority, int enable) {
 		this();
-		this.userId = userId;
 		this.userName = userName;
 		this.password = password;
 		this.email = email;
@@ -110,7 +111,8 @@ public class User {
 		this.enable = enable;
 	}
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@Cascade(CascadeType.SAVE_UPDATE)
 	public Set<Ownership> getOwnerships() {
 		return ownerships;
 	}
@@ -124,7 +126,8 @@ public class User {
 		ownerships.remove(ownership);
 	}
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@Cascade(CascadeType.SAVE_UPDATE)
 	public Set<Transaction> getTransactions() {
 		return transactions;
 	}
