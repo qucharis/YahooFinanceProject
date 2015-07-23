@@ -1,85 +1,72 @@
 package com.mercury.daoimpl;
 
-import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import com.mercury.beans.Stock;
 import com.mercury.beans.Transaction;
-import com.mercury.beans.TransactionInfo;
+
 import com.mercury.beans.User;
 import com.mercury.daos.TransactionDao;
 
 public class TransactionDaoImpl implements TransactionDao {
+	private HibernateTemplate template;
 
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		template = new HibernateTemplate(sessionFactory);
+	}
+	@SuppressWarnings("unchecked")
 	@Override
-	public void addTrans(Stock stock, User user) {
-		// TODO Auto-generated method stub
+	public HashSet<Transaction> queryTransAll() {
+		String hql = "from Transaction";
+		return new HashSet<Transaction>(template.find(hql));
+		
 
 	}
 
 	@Override
-	public TransactionInfo queryTransAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public Set<Transaction> queryTrans(User user) {
+		String hql = "from Transaction trans where trans.user.userid ="
+				+ user.getUserId();
+		return new HashSet<Transaction>(template.find(hql));
 	}
 
 	@Override
-	public TransactionInfo queryTrans(User user) {
-		// TODO Auto-generated method stub
-		return null;
+	public Set<Transaction> queryTrans(Stock stock) {
+		String hql = "from Transaction trans where trans.stock.sid="
+				+ stock.getSid();
+		return new HashSet<Transaction>(template.find(hql));
 	}
-
+	
 	@Override
-	public TransactionInfo queryTrans(Stock stock) {
+	public void addTrans(Transaction tran) {
 		// TODO Auto-generated method stub
-		return null;
+		template.save(tran);
 	}
-
+	
 	@Override
-	public TransactionInfo queryTrans(User user, Date date) {
+	public void deleteTrans(Set<Transaction> trans) {
 		// TODO Auto-generated method stub
-		return null;
+		for(Transaction tran:trans){
+			template.delete(tran);
+		}
 	}
-
 	@Override
-	public TransactionInfo queryTrans(User user, Stock stock) {
+	public void deleteTran(Transaction tran) {
 		// TODO Auto-generated method stub
-		return null;
+		template.delete(tran);
 	}
 
-	@Override
-	public TransactionInfo queryTrans(Date date, Stock stock) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
-	@Override
-	public TransactionInfo queryTrans(User user, Date date, Stock stock) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
-	@Override
-	public void deleteTrans(Transaction trans) {
-		// TODO Auto-generated method stub
+	
 
-	}
+	
 
-	@Override
-	public void deleteTrans(User user) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void deleteTrans(Stock stock) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void deleteTrans(User user, Stock stock) {
-		// TODO Auto-generated method stub
-
-	}
 
 }

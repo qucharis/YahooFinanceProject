@@ -7,3 +7,13 @@ constraint owns_pk primary key(userid, sid),
 constraint owns_userid_fk foreign key(userid) references users(userid),
 constraint owns_sid_fk foreign key(sid) references stocks(sid)
 );
+
+create table owns
+(
+ownershipId number(5) primary key,
+userid number(5) not null,
+sid number(5) not null,
+quantity number(10) not null,
+constraint owns_userid_fk foreign key(userid) references users(userid),
+constraint owns_sid_fk foreign key(sid) references stocks(sid)
+);

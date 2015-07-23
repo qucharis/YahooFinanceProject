@@ -7,11 +7,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+//import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="Users")
@@ -23,21 +27,35 @@ public class User {
 	private BigDecimal balance;
 	private String authority;
 	private int enable;
-	private TransactionInfo transactions;
+	private Set<Transaction> transactions;
 	private Set<Ownership> ownerships;
 	
 	public User () {
 		ownerships = new HashSet<Ownership>();
+		transactions = new HashSet<Transaction>(); 
 	}
 	public User(String userName, String password) {
+		this();
 		this.userName = userName;
 		this.password = password;
 	}
+	public User(String userName, String password, String email, BigDecimal balance, String authority, int enable) {
+		this();
+		this.userName = userName;
+		this.password = password;
+		this.email = email;
+		this.balance = balance;
+		this.authority = authority;
+		this.enable = enable;
+	}
 	
 	@Id
-	@GeneratedValue(generator = "generator")
-	@GenericGenerator(name ="generator", strategy = "increment")
-	@Column(name="USERID")
+	@GeneratedValue(generator = "user_id_gen", 
+    strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "user_id_gen", 
+       sequenceName = "seq_user_userid", 
+       allocationSize = 1)
+	@Column(name="userid", unique = true, nullable = false, length = 5)
 	public int getUserId() {
 		return userId;
 	}
@@ -45,7 +63,7 @@ public class User {
 		this.userId = userId;
 	}
 	
-	@Column(name="USERNAME")
+	@Column(name="username")
 	public String getUserName() {
 		return userName;
 	}
@@ -53,7 +71,7 @@ public class User {
 		this.userName = userName;
 	}
 	
-	@Column(name="PASSWORD")
+	@Column(name="password")
 	public String getPassword() {
 		return password;
 	}
@@ -61,7 +79,7 @@ public class User {
 		this.password = password;
 	}
 	
-	@Column(name="EMAIL")
+	@Column(name="email")
 	public String getEmail() {
 		return email;
 	}
@@ -69,7 +87,7 @@ public class User {
 		this.email = email;
 	}
 	
-	@Column(name="BALANCE")
+	@Column(name="balance")
 	public BigDecimal getBalance() {
 		return balance;
 	}
@@ -77,7 +95,7 @@ public class User {
 		this.balance = balance;
 	}
 	
-	@Column(name="AUTHORITY")
+	@Column(name="authority")
 	public String getAuthority() {
 		return authority;
 	}
@@ -85,7 +103,7 @@ public class User {
 		this.authority = authority;
 	}
 	
-	@Column(name="ENABLED")
+	@Column(name="enabled")
 	public int getEnable() {
 		return enable;
 	}
@@ -93,26 +111,34 @@ public class User {
 		this.enable = enable;
 	}
 	
-	public TransactionInfo getTransactions() {
-		return transactions;
-	}
-	public void setTransactions(TransactionInfo transactions) {
-		this.transactions = transactions;
-	}
-	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userId")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@Cascade(CascadeType.SAVE_UPDATE)
 	public Set<Ownership> getOwnerships() {
 		return ownerships;
 	}
 	public void setOwnerships(Set<Ownership> ownerships) {
 		this.ownerships = ownerships;
 	}
-	
 	public void addOwnership(Ownership ownership) {
 		ownerships.add(ownership);
 	}
 	public void removeOwnership(Ownership ownership) {
 		ownerships.remove(ownership);
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@Cascade(CascadeType.SAVE_UPDATE)
+	public Set<Transaction> getTransactions() {
+		return transactions;
+	}
+	public void setTransactions(Set<Transaction> transactions) {
+		this.transactions = transactions;
+	}
+	public void addTransaction(Transaction transaction) {
+		transactions.add(transaction);
+	}
+	public void removeTransaction(Transaction transaction) {
+		transactions.remove(transaction);
 	}
 	
 }
