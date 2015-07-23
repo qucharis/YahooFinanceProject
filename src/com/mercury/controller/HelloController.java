@@ -94,13 +94,16 @@ public class HelloController {
 		
 		Stock stock = new Stock("amazon", "amaz");
 		User user = new User("qqq","12345","aaa@gmail.com",new BigDecimal(10),"admin",0);
-
+		Transaction transaction = new Transaction(user, stock);
+		transaction.setAmount(12);
+		transaction.setUnitprice(new BigDecimal(25));
 		Ownership ownership = new Ownership();
 		ownership.setQuantity(10);
 		ownership.setStock(stock);
 		ownership.setUser(user);
 		
 		stock.addOwnership(ownership);
+		stock.addTransaction(transaction);
 		sd.addStock(stock);
 		///Stock stock1 = sd.getStockByStockID(4);
 		
