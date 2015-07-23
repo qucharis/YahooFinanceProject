@@ -28,8 +28,18 @@ public class Transaction {
 	private BigDecimal unitprice;
 	private Timestamp timestamp;
 	
-	@Id
+	public Transaction(){
+		this.timestamp=new Timestamp((new java.util.Date()).getTime());
+		this.unitprice = new BigDecimal(0);
+		this.amount = 0;
+	} 
+	public Transaction(User user, Stock stock){
+		this();
+		this.user = user;
+		this.stock = stock;
+	}
 	
+	@Id
 	@GeneratedValue(generator = "tran_id_gen", 
     strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "tran_id_gen", 
@@ -43,7 +53,7 @@ public class Transaction {
 		this.transid = transid;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER,targetEntity=User.class)
 	@JoinColumn(name="userid")
 	public User getUser() {
 		return user;
@@ -51,7 +61,7 @@ public class Transaction {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER,targetEntity=Stock.class)
 	@JoinColumn(name="sid")
 	public Stock getStock() {
 		return stock;
@@ -80,14 +90,14 @@ public class Transaction {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-	@Column(name = "uinitprice")
+	@Column(name = "unitprice")
 	public BigDecimal getUnitprice() {
 		return unitprice;
 	}
 	public void setUnitprice(BigDecimal unitprice) {
 		this.unitprice = unitprice;
 	}
-	@Column(name="timestamp")
+	@Column(name="transtime")
 	public Timestamp getTimestamp() {
 		return timestamp;
 	}
