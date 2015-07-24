@@ -20,7 +20,10 @@
     </bean>
     
     <bean id="helloController" class="com.mercury.controller.HelloController"/>
-
+    
+    <bean id="RegisterService" class="com.mercury.services.RegisterService">
+    	<property name="userDao" ref="UserDao"/>
+    </bean>
     
     <bean id="TransactionDao" class="com.mercury.daoimpl.TransactionDaoImpl">
     	<property name="sessionFactory" ref="sessionFactory"/>

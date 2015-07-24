@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mercury.beans.Stock;
 import com.mercury.beans.Transaction;
 import com.mercury.daos.StockDao;
 import com.mercury.daos.TransactionDao;
@@ -86,6 +87,17 @@ public class HelloController {
 		/*User user1 = ud.getUserById(16);
 		opStr = user1.getUserId() + user1.getUserName() + user1.getPassword() +"<br/>";*/
 
+		/***************test stock impl******************/
+		Stock stock1 = new Stock("yahoo", "yaho");
+		Stock stock2 = new Stock("google", "gogl");
+		Stock stock3 = new Stock("amazon", "amzn");
+		sd.addStock(stock1);
+		sd.addStock(stock2);
+		sd.addStock(stock3);
+		for(Stock stock:sd.queryAll()) {
+			System.out.println(stock.getSid() + " " + stock.getScode() + stock.getStockName());
+		}
+		/************************************************/
 		
 		Set<Transaction> set = td.queryTransAll();
 		for(Transaction t:set){
