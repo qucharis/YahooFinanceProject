@@ -8,7 +8,6 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import com.mercury.beans.Stock;
 import com.mercury.beans.Transaction;
-
 import com.mercury.beans.User;
 import com.mercury.daos.TransactionDao;
 
@@ -27,6 +26,7 @@ public class TransactionDaoImpl implements TransactionDao {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Set<Transaction> queryTrans(User user) {
 		String hql = "from Transaction trans where trans.user.userid ="
@@ -34,6 +34,7 @@ public class TransactionDaoImpl implements TransactionDao {
 		return new HashSet<Transaction>(template.find(hql));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Set<Transaction> queryTrans(Stock stock) {
 		String hql = "from Transaction trans where trans.stock.sid="
