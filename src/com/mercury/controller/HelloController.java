@@ -1,12 +1,18 @@
 package com.mercury.controller;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,17 +60,6 @@ public class HelloController {
 	public void setSd(StockDao sd) {
 		this.sd = sd;
 	}
-	
-/*	@RequestMapping(value="/hello", method=RequestMethod.POST)
-	public ModelAndView process(@ModelAttribute("user") 
-			User user, BindingResult result) {
-		UserInfo userInfo = hs.process(user);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewPage);
-		mav.addObject("userInfo", userInfo);
-		return mav;
-	}*/
-
 
 	@RequestMapping("/test")
 	public String test(){
@@ -80,9 +75,19 @@ public class HelloController {
 
 	@RequestMapping(value="/main", method = RequestMethod.GET)
 	public ModelAndView mainPage() {
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("hello");
-		mav.addObject("ownershipInfo", us.getOwnershipInfoByUserId(8));
+		mav.setViewName("main");
+		mav.addObject("ownershipInfo", us.getOwnershipInfoByUserName(userName));
+		return mav;
+	}
+	
+	@RequestMapping(value="/admin", method = RequestMethod.GET)
+	public ModelAndView adminPage() {
+		String adminName = SecurityContextHolder.getContext().getAuthentication().getName();
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("admin");
+		mav.addObject("title", "Welcome back admin " + adminName);
 		return mav;
 	}
 	

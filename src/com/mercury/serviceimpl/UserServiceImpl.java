@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public OwnershipInfo getOwnershipInfoByUser(User user) {
 		// TODO Auto-generated method stub
-		ud.addUser(user);
+		//ud.addUser(user);
 		OwnershipInfo ownershipInfo = new OwnershipInfo();
 		ownershipInfo.setMessage("Hello " + user.getUserName() + ", here are you owned stocks!");
 		ownershipInfo.setOwnerships(user.getOwnerships());

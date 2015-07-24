@@ -10,22 +10,19 @@
 		http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
 	<sec:http auto-config="true" use-expressions="true">
-    	<sec:intercept-url pattern="/main*" access="hasAnyRole('ROLE_USER')"/>
+    	<sec:intercept-url pattern="/main*" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"/>
     	<sec:intercept-url pattern="/**" access="permitAll" />
     	<sec:form-login 
         	login-page="/login.html"
-        	default-target-url="/main.html"
+        	authentication-success-handler-ref="loginSuccessfulAuthHandler"
         	authentication-failure-url="/login.html?login_error=1" 
         />
         
-        <sec:logout logout-success-url="/login.html"/>
+        <sec:logout logout-success-url="/login.html" delete-cookies="JSESSIONID"/>
         <sec:remember-me/>
 	</sec:http>
 
-<!-- 	<bean id="postSuccessAuthHandler" class="com.mercury.demand.security.PostSuccessfulAuthenticationHandler">
-	    <property name="defaultTargetUrl" value="/content/main.htm" />
-	    <property name="alwaysUseDefaultTargetUrl" value="true" />
-	</bean> -->
+	<bean id="loginSuccessfulAuthHandler" class="com.mercury.demand.LoginSuccessfulAuthenticationHandler"/>
 	
 	<sec:authentication-manager alias="authenticationManager">
         <sec:authentication-provider>
