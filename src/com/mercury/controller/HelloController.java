@@ -1,5 +1,6 @@
 package com.mercury.controller;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mercury.beans.Ownership;
 import com.mercury.beans.Stock;
 import com.mercury.beans.Transaction;
+import com.mercury.beans.User;
 import com.mercury.daos.StockDao;
 import com.mercury.daos.TransactionDao;
 import com.mercury.daos.UserDao;
@@ -94,7 +96,7 @@ public class HelloController {
 			
 			opStr = opStr+"<br/><br/>";
 		}
-		*/
+		
 		
 		Stock stock = new Stock("amazon", "amaz");
 		User user = new User("qqq","12345","aaa@gmail.com",new BigDecimal(10),"admin",0);
