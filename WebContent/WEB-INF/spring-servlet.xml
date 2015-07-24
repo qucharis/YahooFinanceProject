@@ -20,7 +20,6 @@
     </bean>
     
     <bean id="helloController" class="com.mercury.controller.HelloController"/>
-
     
    <!--  <bean id="SecurityController" class="com.mercury.controller.SecurityController">
     	<property name="rs" ref="RegisterService"/>
