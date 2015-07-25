@@ -62,7 +62,6 @@ public class SecurityController {
 
 	@RequestMapping("/index")
 	public String index(){
-		System.out.println("in SecurityController index !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		return "security/index";
 	}
 	
