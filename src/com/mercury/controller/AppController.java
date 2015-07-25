@@ -88,7 +88,7 @@ public class AppController {
 	public ModelAndView dashboard(){
 		ModelAndView mav = new ModelAndView();
 		String username=SecurityContextHolder.getContext().getAuthentication().getName();
-		System.out.println("in AppController.java dashboard(). username ================================== " + username);
+		
 		/*Trader trader = trader_s.getTrader(username);
 		mav.addObject("shownName", 
 				trader.getFirst_name());
