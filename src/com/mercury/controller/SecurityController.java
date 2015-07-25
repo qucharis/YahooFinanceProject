@@ -60,9 +60,9 @@ public class SecurityController {
 	}*/
 	
 
-	@RequestMapping("/login")
+	@RequestMapping("/index")
 	public String index(){
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		System.out.println("in SecurityController index !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		return "security/index";
 	}
 	
@@ -73,13 +73,13 @@ public class SecurityController {
 	
 	@RequestMapping(value="/register")
 	public String enroll(HttpServletRequest  request){
-		/*String username = request.getParameter("r_username");
+		String username = request.getParameter("r_username");
 		String password = request.getParameter("r_password");
-		String email = request.getParameter("r_email");*/
-		String username = "alex";
+		String email = request.getParameter("r_email");
+		/*String username = "alex";
 		String password = "12345";
 		String email = "good.qu@gmail.com";
-		
+		*/
 		
 		/*String firstname = request.getParameter("r_firstname");
 		String lastname = request.getParameter("r_lastname");
@@ -91,7 +91,7 @@ public class SecurityController {
 		*/
 		User user = new User(username, password);
 		user.setEmail(email);
-		user.setAuthority("normal");
+		user.setAuthority("ROLE_USER");
 		user.setBalance(new BigDecimal(0));
 		user.setEnable(1);
 		

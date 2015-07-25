@@ -27,7 +27,7 @@ import com.mercury.beans.*;
 public class RegisterService {
 	@Autowired
 	private UserDao userDao;
-	
+
 	public UserDao getUserDao() {
 		return userDao;
 	}
