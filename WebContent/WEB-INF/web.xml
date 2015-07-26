@@ -8,9 +8,32 @@
 		id="WebApp_ID" version="3.0">
 	<display-name>YahooFinanceProject</display-name>
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
+ 
+  	<!-- Spring Security -->
+  	<!-- <filter>
+    	<filter-name>springSecurityFilterChain</filter-name>
+    	<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  	</filter>
+  	<filter-mapping>
+    	<filter-name>springSecurityFilterChain</filter-name>
+    	<url-pattern>/*</url-pattern>
+  	</filter-mapping> -->
+  	
 
+  	<!-- Spring Listeners and Corresponding parameters -->
+  	 
+<!--   	<listener>
+    	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  	</listener>
+  	<context-param>
+    	<param-name>contextConfigLocation</param-name>
+    	<param-value>
+			/WEB-INF/spring-*.xml
+		</param-value>
+  	</context-param>
+   -->
 	<!-- JNDI Configuration -->
 	<resource-ref>
 		<description>Oracle data source</description>

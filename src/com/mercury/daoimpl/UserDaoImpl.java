@@ -18,7 +18,6 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	@Override
-
 	public void addUser(User user) {
 
 		// TODO Auto-generated method stub
@@ -28,20 +27,15 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User getUserById(int userId) {
 		// TODO Auto-generated method stub
-
 		return (User)template.get(User.class, userId);
-
 	}
 
 	@Override
 	public User getUserByUsername(String userName) {
 		// TODO Auto-generated method stub
-
 		String hql = "from User as user where user.userName ='" + userName + "'";
 		@SuppressWarnings("unchecked")
 		List<User> users = template.find(hql);
 		return users.get(0);
-
 	}
-
 }

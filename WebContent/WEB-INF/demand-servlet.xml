@@ -18,8 +18,12 @@
         <property name="prefix" value="/WEB-INF/pages/" />
         <property name="suffix" value=".jsp" />
     </bean>
-    
-    <bean id="helloController" class="com.mercury.controller.HelloController"/>
+
+    <bean id="helloController" class="com.mercury.controller.HelloController">
+    	<property name="td" ref="TransactionDao"/>
+    	<property name="sd" ref="StockDao"/>
+    	<property name="ud" ref="UserDao"/>
+    </bean>
     
    <!--  <bean id="SecurityController" class="com.mercury.controller.SecurityController">
     	<property name="rs" ref="RegisterService"/>
