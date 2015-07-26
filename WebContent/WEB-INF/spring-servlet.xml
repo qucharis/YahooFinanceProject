@@ -19,8 +19,16 @@
         <property name="suffix" value=".jsp" />
     </bean>
     
-    <bean id="helloController" class="com.mercury.controller.HelloController"/>
+    <bean id="helloController" class="com.mercury.controller.HelloController">
+        <property name="td" ref="TransactionDao"/>
+    	<property name="sd" ref="StockDao"/>
+    	<property name="us" ref="userService"/>
+    </bean>
 
+    
+	<bean id="userService" class="com.mercury.serviceimpl.UserServiceImpl">
+    	<property name="ud" ref="UserDao"/>
+    </bean>
     
     <bean id="TransactionDao" class="com.mercury.daoimpl.TransactionDaoImpl">
     	<property name="sessionFactory" ref="sessionFactory"/>
