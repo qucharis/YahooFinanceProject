@@ -1,6 +1,5 @@
 package com.mercury.controller;
 
-import java.math.BigDecimal;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mercury.beans.Ownership;
-import com.mercury.beans.Stock;
 import com.mercury.beans.Transaction;
-import com.mercury.beans.User;
 import com.mercury.daos.StockDao;
 import com.mercury.daos.TransactionDao;
 import com.mercury.daos.UserDao;
@@ -74,8 +70,11 @@ public class HelloController {
 	@RequestMapping("/main")
 	@ResponseBody
 	public String mainPage() {	
+		
 		/*Stock stock = new Stock("yahoo", "yo");
 		sd.addStock(stock);
+		
+
 		User user = new User(10000,"qwer","123","abc@gmail.com",new BigDecimal(10),"admin",0);
 		ud.save(user);
 		Transaction tran = new Transaction(user,stock);
@@ -96,23 +95,7 @@ public class HelloController {
 			
 			opStr = opStr+"<br/><br/>";
 		}
-		
-		
-		Stock stock = new Stock("amazon", "amaz");
-		User user = new User("qqq","12345","aaa@gmail.com",new BigDecimal(10),"admin",0);
-		Transaction transaction = new Transaction(user, stock);
-		transaction.setAmount(12);
-		transaction.setUnitprice(new BigDecimal(25));
-		Ownership ownership = new Ownership();
-		ownership.setQuantity(10);
-		ownership.setStock(stock);
-		ownership.setUser(user);
-		
-		stock.addOwnership(ownership);
-		stock.addTransaction(transaction);
-		sd.addStock(stock);
-		///Stock stock1 = sd.getStockByStockID(4);
-		
 		return opStr;
 	}
+	
 }
