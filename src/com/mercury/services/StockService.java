@@ -18,9 +18,7 @@ import com.mercury.beans.StockInfo;
 import com.mercury.daos.StockDao;
 
 public class StockService {
-	@Autowired
-	StockDao sd;
-	
+
 	public double getPrice(Stock stock){
 		return getInfo(stock).getCurrentPrice();
 	}
@@ -59,5 +57,4 @@ public class StockService {
 		}
 		return si;
 	}
-
 }

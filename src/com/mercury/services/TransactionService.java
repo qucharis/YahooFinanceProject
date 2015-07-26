@@ -20,6 +20,7 @@ import com.mercury.daos.TransactionDao;
 public class TransactionService {
 	@Autowired
 	private TransactionDao tr;
+	private StockService ss;
 	
 	public Set<Transaction> queryByUser(User user){
 		return tr.queryTrans(user);
@@ -45,28 +46,21 @@ public class TransactionService {
 		tran.setStock(stock);
 		tran.setUser(user);
 		tran.setTimestamp(new Timestamp((new java.util.Date()).getTime()));
-		tran.setUnitprice(checkUnitPrice(stock));
+		tran.setUnitprice(new BigDecimal(ss.getInfo(stock).getCurrentPrice()));
+		tr.addTrans(tran);	
+	}
+	
+	public void addTransaction(User user, Stock stock, int amount,Timestamp ts) {
+		Transaction tran = new Transaction();
+		tran.setAmount(amount);
+		tran.setStock(stock);
+		tran.setUser(user);
+		tran.setTimestamp(ts);
+		tran.setUnitprice(new BigDecimal(ss.getInfo(stock).getCurrentPrice()));
 		tr.addTrans(tran);	
 	}
 	
 	
-	public BigDecimal checkUnitPrice(Stock stock){
-		String yahoo_quote = "http://finance.yahoo.com/d/quotes.csv?s=" + stock.getScode() + "&f=snc1l1&e=.c";
-		double price = 0;
-		try {
-			URL url = new URL(yahoo_quote);
-			URLConnection urlconn = url.openConnection();
-			BufferedReader in = new BufferedReader(new InputStreamReader(urlconn.getInputStream()));
-			String content = in.readLine();
-			content = content.replace((char)34, (char)32);
-			String[] tokens = content.split(",");
-			price = Double.parseDouble(tokens[tokens.length-1].trim());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return new BigDecimal(price);
-		
-	}
 	
 	
 }

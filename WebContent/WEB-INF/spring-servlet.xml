@@ -20,18 +20,10 @@
     </bean>
     
     <bean id="helloController" class="com.mercury.controller.HelloController"/>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 
     <!-- Dao Injection -->
     <bean id="transactionDao" class="com.mercury.daoimpl.TransactionDaoImpl">
-=======
-=======
-
->>>>>>> origin/modify-hibernate-mappings
-    
-    <bean id="TransactionDao" class="com.mercury.daoimpl.TransactionDaoImpl">
->>>>>>> origin/modify-hibernate-mappings
     	<property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     <bean id="stockDao" class="com.mercury.daoimpl.StockDaoImpl">
@@ -41,19 +33,11 @@
     	<property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     <!-- Service Injection -->
     <bean id="tranSS" class="com.mercury.services.TransactionService"/>
     <bean id="ss" class="com.mercury.services.StockService"/>
     
-    
-=======
-
->>>>>>> origin/modify-hibernate-mappings
-=======
-    
->>>>>>> origin/modify-hibernate-mappings
     <!-- Define Daos -->
     <!--  
 	<bean id="userDao" class="com.mercury.daos.UserDao">
