@@ -74,7 +74,7 @@ public class HelloController {
 	}
 
 	@RequestMapping(value="/main", method = RequestMethod.GET)
-	public ModelAndView mainPage() {
+	public ModelAndView mainPage(HttpServletRequest  request) {
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main");
