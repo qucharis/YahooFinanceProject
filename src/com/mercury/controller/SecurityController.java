@@ -59,13 +59,6 @@ public class SecurityController {
 		return mav;
 	}*/
 	
-
-	@RequestMapping("/login")
-	public String index(){
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		return "security/index";
-	}
-	
 	/*@RequestMapping("/register.htm")
 	public String register(){
 		return "security/register";
