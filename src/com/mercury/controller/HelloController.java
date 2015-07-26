@@ -1,20 +1,14 @@
 package com.mercury.controller;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-=======
 import java.math.BigDecimal;
->>>>>>> origin/modify-hibernate-mappings
-=======
->>>>>>> origin/modify-hibernate-mappings
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,19 +16,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 
 import com.mercury.beans.Stock;
 import com.mercury.beans.StockInfo;
-=======
 import com.mercury.beans.Ownership;
 import com.mercury.beans.Stock;
->>>>>>> origin/modify-hibernate-mappings
-=======
->>>>>>> origin/modify-hibernate-mappings
+import com.mercury.beans.User;
+
 import com.mercury.beans.Transaction;
 import com.mercury.daos.StockDao;
 import com.mercury.daos.TransactionDao;
@@ -162,13 +153,7 @@ public class HelloController {
 
 	@RequestMapping("/main")
 	@ResponseBody
-<<<<<<< HEAD
-	public String mainPage() {
 
-		/*
-		 * Stock stock = new Stock("Google Inc.", "GOOG"); sd.addStock(stock);
-		 */
-=======
 	public String mainPage() {	
 		
 		/*Stock stock = new Stock("yahoo", "yo");
@@ -179,7 +164,6 @@ public class HelloController {
 		ud.save(user);
 		Transaction tran = new Transaction(user,stock);
 		td.addTrans(tran);*/
->>>>>>> origin/modify-hibernate-mappings
 
 		User user = ud.getUserById(16);
 		String opStr = new String();
@@ -213,36 +197,8 @@ public class HelloController {
 
 			opStr = opStr + "<br/><br/>";
 		}
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 		return opStr;
 	}
 
-=======
-		
-		
-		Stock stock = new Stock("amazon", "amaz");
-		User user = new User("qqq","12345","aaa@gmail.com",new BigDecimal(10),"admin",0);
-		Transaction transaction = new Transaction(user, stock);
-		transaction.setAmount(12);
-		transaction.setUnitprice(new BigDecimal(25));
-		Ownership ownership = new Ownership();
-		ownership.setQuantity(10);
-		ownership.setStock(stock);
-		ownership.setUser(user);
-		
-		stock.addOwnership(ownership);
-		stock.addTransaction(transaction);
-		sd.addStock(stock);
-		///Stock stock1 = sd.getStockByStockID(4);
-		
-		return opStr;
-	}
->>>>>>> origin/modify-hibernate-mappings
-=======
-		return opStr;
-	}
-	
->>>>>>> origin/modify-hibernate-mappings
 }

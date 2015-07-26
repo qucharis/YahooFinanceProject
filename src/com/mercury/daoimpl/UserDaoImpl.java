@@ -50,14 +50,5 @@ public class UserDaoImpl implements UserDao {
 		return users.get(0);
 
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-
-
-=======
->>>>>>> origin/modify-hibernate-mappings
-=======
-
->>>>>>> origin/modify-hibernate-mappings
 }
