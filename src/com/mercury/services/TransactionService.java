@@ -1,13 +1,8 @@
 package com.mercury.services;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.net.URL;
-import java.net.URLConnection;
 import java.sql.Timestamp;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,17 +42,17 @@ public class TransactionService {
 		tran.setUser(user);
 		tran.setTimestamp(new Timestamp((new java.util.Date()).getTime()));
 		tran.setUnitprice(new BigDecimal(ss.getInfo(stock).getCurrentPrice()));
-		tr.addTrans(tran);	
+		tr.addTran(tran);	
 	}
 	
-	public void addTransaction(User user, Stock stock, int amount,Timestamp ts) {
+	public void addTransaction(User user, Stock stock, int amount,double price,Timestamp ts) {
 		Transaction tran = new Transaction();
 		tran.setAmount(amount);
 		tran.setStock(stock);
 		tran.setUser(user);
 		tran.setTimestamp(ts);
-		tran.setUnitprice(new BigDecimal(ss.getInfo(stock).getCurrentPrice()));
-		tr.addTrans(tran);	
+		tran.setUnitprice(new BigDecimal(price));
+		tr.addTran(tran);	
 	}
 	
 	

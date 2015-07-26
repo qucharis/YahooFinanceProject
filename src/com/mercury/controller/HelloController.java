@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.math.BigDecimal;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,8 +21,6 @@ import au.com.bytecode.opencsv.CSVWriter;
 
 import com.mercury.beans.Stock;
 import com.mercury.beans.StockInfo;
-import com.mercury.beans.Ownership;
-import com.mercury.beans.Stock;
 import com.mercury.beans.User;
 
 import com.mercury.beans.Transaction;
@@ -84,10 +81,7 @@ public class HelloController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-
-		// generate whatever data you want
+	
 
 		try {
 			CSVWriter cw = new CSVWriter(new FileWriter(fileName));

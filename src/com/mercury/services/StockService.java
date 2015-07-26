@@ -1,14 +1,10 @@
 package com.mercury.services;
 
 import java.io.BufferedReader;
-import java.io.FileWriter;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +14,32 @@ import com.mercury.beans.StockInfo;
 import com.mercury.daos.StockDao;
 
 public class StockService {
+	@Autowired
+	private StockDao sd;
+	
+	public void addStock(Stock stock){
+		sd.addStock(stock);
+	}
+	public void deleteStock(String code){
+		for (Stock s:sd.qureyAll()){
+			if (s.getScode().equalsIgnoreCase(code));
+			sd.deleteStock(s);
+		}
+	}
+	
+	public StockInfo getStockInfoBCode(String code){
+		Set<Stock> set = sd.qureyAll();
+		for(Stock s : set){
+			if(s.getScode().equals(code)){
+				return getInfo(s);
+			}
+		}
+		return null;
+	}
+	
+	public StockInfo getStockInfoById(int id){
+		return getInfo(sd.getStockByStockID(id));
+	}
 
 	public double getPrice(Stock stock){
 		return getInfo(stock).getCurrentPrice();

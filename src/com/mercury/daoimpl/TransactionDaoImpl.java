@@ -42,8 +42,16 @@ public class TransactionDaoImpl implements TransactionDao {
 		return new HashSet<Transaction>(template.find(hql));
 	}
 	
+	
 	@Override
-	public void addTrans(Transaction tran) {
+	public void addTran(Set<Transaction> trans) {
+		for(Transaction t:trans){
+			template.save(t);
+		}
+		
+	}
+	@Override
+	public void addTran(Transaction tran) {
 		// TODO Auto-generated method stub
 		template.save(tran);
 	}

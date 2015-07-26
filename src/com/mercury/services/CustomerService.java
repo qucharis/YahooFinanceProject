@@ -3,7 +3,6 @@ package com.mercury.services;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,23 +12,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 
-import com.mercury.beans.Stock;
+import com.mercury.beans.StockInfo;
 import com.mercury.beans.User;
 
 
 public class CustomerService {
-
-	public void requestExchange(Stock stock, User user, int amount) {
+	@Autowired
+	StockService ss = new StockService();
+	
+	public void requestExchange(StockInfo stockInfo, User user, int amount) {
 		String[] request = new String[5];
 		String fileName = "D:/serverfiles/" + user.getUserId() + "_requests.csv";
 		List<String[]> list = new ArrayList<String[]>();
-		
-		StockService ss = new StockService();
-		
 		request[0] = String.valueOf(user.getUserId());
-		request[1] = String.valueOf(stock.getSid());
+		request[1] = String.valueOf(stockInfo.getSid());
 		request[2] = String.valueOf(amount);
-		request[3] = String.valueOf(ss.getPrice(stock));
+		request[3] = String.valueOf(stockInfo.getCurrentPrice());
 		request[4] = (new Timestamp((new java.util.Date()).getTime())).toString();
 		
 		try {
@@ -43,6 +41,7 @@ public class CustomerService {
 		try {
 			CSVWriter cw = new CSVWriter(new FileWriter(fileName));
 			cw.writeAll(list);
+			cw.writeNext(request);
 			cw.flush();
 			cw.close();
 		} catch (IOException e) {
