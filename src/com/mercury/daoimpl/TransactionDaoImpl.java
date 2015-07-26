@@ -29,7 +29,7 @@ public class TransactionDaoImpl implements TransactionDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<Transaction> queryTrans(User user) {
-		String hql = "from Transaction trans where trans.user.userid ="
+		String hql = "from Transaction trans where trans.user.userId ="
 				+ user.getUserId();
 		return new HashSet<Transaction>(template.find(hql));
 	}
