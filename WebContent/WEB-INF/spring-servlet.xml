@@ -20,15 +20,8 @@
     </bean>
     
     <bean id="helloController" class="com.mercury.controller.HelloController"/>
+
     
-   <!--  <bean id="SecurityController" class="com.mercury.controller.SecurityController">
-    	<property name="rs" ref="RegisterService"/>
-    </bean> -->
-    <bean id="RegisterService" class="com.mercury.services.RegisterService">
-    	<property name="userDao" ref="UserDao"/>
-    </bean>
-    
-        
     <bean id="TransactionDao" class="com.mercury.daoimpl.TransactionDaoImpl">
     	<property name="sessionFactory" ref="sessionFactory"/>
     </bean>
@@ -39,7 +32,7 @@
     	<property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     
-
+    
     <!-- Define Daos -->
     <!--  
 	<bean id="userDao" class="com.mercury.daos.UserDao">

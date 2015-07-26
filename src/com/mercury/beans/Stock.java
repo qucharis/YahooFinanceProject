@@ -4,9 +4,6 @@ import java.util.*;
 
 import javax.persistence.*;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="stocks")
@@ -16,11 +13,9 @@ public class Stock {
 	private String scode;
 	private String stockName;
 	private Set<Ownership> ownerships;
-	private Set<Transaction> transactions;
 	
 	public Stock() {
 		ownerships = new HashSet<Ownership>();
-		transactions = new HashSet<Transaction>();
 	}
 	public Stock(String stockName, String scode) {
 		this();
@@ -54,8 +49,7 @@ public class Stock {
 	public void setStockName(String stockName) {
 		this.stockName = stockName;
 	}
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="stock")
-	@Cascade(CascadeType.SAVE_UPDATE)
+	@OneToMany(mappedBy="stock")
 	public Set<Ownership> getOwnerships() {
 		return ownerships;
 	}
@@ -70,21 +64,6 @@ public class Stock {
 	}
 	public void removeOwnership(Ownership ownership) {
 		ownerships.remove(ownership);
-	}
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "stock")
-	@Cascade(CascadeType.SAVE_UPDATE)
-	public Set<Transaction> getTransactions() {
-		return transactions;
-	}
-	public void setTransactions(Set<Transaction> transactions) {
-		this.transactions = transactions;
-	}
-	public void addTransaction(Transaction transaction) {
-		transactions.add(transaction);
-	}
-	public void removeTransaction(Transaction transaction) {
-		transactions.remove(transaction);
 	}
 }
 
