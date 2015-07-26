@@ -18,7 +18,9 @@
         <property name="prefix" value="/WEB-INF/pages/" />
         <property name="suffix" value=".jsp" />
     </bean>
+    
     <bean id="helloController" class="com.mercury.controller.HelloController"/>
+
     
     <bean id="TransactionDao" class="com.mercury.daoimpl.TransactionDaoImpl">
     	<property name="sessionFactory" ref="sessionFactory"/>

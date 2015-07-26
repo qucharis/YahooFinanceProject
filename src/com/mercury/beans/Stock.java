@@ -4,7 +4,6 @@ import java.util.*;
 
 import javax.persistence.*;
 
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="stocks")
