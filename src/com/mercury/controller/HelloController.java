@@ -59,7 +59,7 @@ public class HelloController {
 	private TransactionService tranSS;
 	@Autowired
 	private StockService ss;
-
+	@Autowired 
 	private UserService us;
 
 	public UserService getUs() {
