@@ -37,9 +37,10 @@ public class StockDaoImpl implements StockDao {
 		List<Stock> stock = template.find(hql);
 		return stock.get(0);
 	}
-	
+
 	@Override
 	public Set<Stock> queryAll() {
+		// TODO Auto-generated method stub
 		String hql = "from Stock";
 		return new HashSet<Stock>(template.find(hql));
 	}

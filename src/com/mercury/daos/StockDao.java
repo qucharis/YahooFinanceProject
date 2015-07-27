@@ -1,5 +1,7 @@
 package com.mercury.daos;
 
+
+
 import java.util.Set;
 import com.mercury.beans.Stock;
 
@@ -8,4 +10,5 @@ public interface StockDao {
 	public void deleteStock(Stock stock);
 	public Stock getStockByStockID(int sid);	
 	public Set<Stock> queryAll();
+
 }
