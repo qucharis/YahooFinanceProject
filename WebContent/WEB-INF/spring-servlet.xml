@@ -31,7 +31,7 @@
     	<property name="userDao" ref="UserDao"/>
     </bean>
     
-	<bean id="userService" class="com.mercury.serviceimpl.UserServiceImpl">
+	<bean id="userService" class="com.mercury.services.UserService">
     	<property name="ud" ref="UserDao"/>
     </bean>
     
