@@ -39,7 +39,8 @@ public class StockDaoImpl implements StockDao {
 	}
 
 	@Override
-	public Set<Stock> qureyAll() {
+	public Set<Stock> queryAll() {
+		// TODO Auto-generated method stub
 		String hql = "from Stock";
 		return new HashSet<Stock>(template.find(hql));
 	}

@@ -21,14 +21,14 @@ public class StockService {
 		sd.addStock(stock);
 	}
 	public void deleteStock(String code){
-		for (Stock s:sd.qureyAll()){
+		for (Stock s:sd.queryAll()){
 			if (s.getScode().equalsIgnoreCase(code));
 			sd.deleteStock(s);
 		}
 	}
 	
 	public StockInfo getStockInfoBCode(String code){
-		Set<Stock> set = sd.qureyAll();
+		Set<Stock> set = sd.queryAll();
 		for(Stock s : set){
 			if(s.getScode().equals(code)){
 				return getInfo(s);
