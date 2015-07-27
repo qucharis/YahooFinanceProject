@@ -47,7 +47,7 @@ public class UserService {
 		return ud.getUserById(id);
 	}
 	
-	public User getUserEmail(String email){
+	public User getUserByEmail(String email){
 		Set<User> set = ud.queryAll();
 		for(User u:set){
 			if (u.getEmail().equals(email))
