@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Portfolio</title>
+<title>History</title>
 <link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
 <link href="css/bootstrap.css" rel="stylesheet">
@@ -32,25 +32,8 @@
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script><!-- angularJS Ajax call: http call -->
 <script src="js/bootstrap.js"></script>
 
-<script>
-//change active class
-/* $(document).ready(function() {
-	$('.navbar li').click(function() {
-	    $('.navbar li.active').removeClass('active');
-	    var $this = $(this);
-	    if (!$this.hasClass('active')) {
-	        $this.addClass('active');
-	    }
-	});
-}); */
-
-
-</script>
-
-
 </head>
 <body>
-
 <div class="navbar navbar-default navbar-static-top">
 	<div class="container">
 		<a class="navbar-header" href="/YahooFinanceProject/login.html"><img src="images/dollar2.jpg" height="50" width="50"></a> 
@@ -66,29 +49,15 @@
 		
 		<div class= "collapse navbar-collapse navHeaderCollapse">
 			<ul id= "menu" class= "nav navbar-nav navbar-right">
-				<li class= "active"><a href = "/YahooFinanceProject/main.html">Portfolio</a></li>
+				<li><a href = "/YahooFinanceProject/main.html">Portfolio</a></li>
 				<li><a href = "/YahooFinanceProject/transaction.html">Transaction</a></li>
 				<li><a href = "/YahooFinanceProject/marketdata.html">Market data</a></li>
-				<li><a href = "/YahooFinanceProject/history.html">History</a></li>
+				<li class= "active"><a href = "/YahooFinanceProject/history.html">History</a></li>
 				<li><a href="<c:url value='/j_spring_security_logout'/>">Logout</a></li>
 			</ul>
 		</div>
 	</div>
 </div>
-
-<h1><font color="blue">${ownershipInfo.message}</font></h1>
-<table width="200" border="1">
-	<tr>
-		<th>Stock Name</th>
-		<th>Quantity</th>
-	</tr>
-	<c:forEach var="ownership" items="${ownershipInfo.ownerships}">
-		<tr>
-			<td>${ownership.stock.stockName}</td>
-			<td>${ownership.quantity}</td>
-		</tr>
-	</c:forEach>
-</table>
 
 </body>
 </html>
