@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Hello Admin</title>
+<title>Admin</title>
 </head>
 <body>
 <h1><font color="green">${title}</font></h1>
