@@ -79,6 +79,14 @@ input.ng-invalid.ng-dirty{
 		if ("<c:out value='${param.login_error}'/>" != "") {
 			$('#wrongCredentials').show();
 		}
+		
+ 		<c:if test="${isUserExist}">
+	    	alert("This user already exist!");
+			$("#signup").trigger("click");
+		</c:if>
+		<c:if test="${registerResult}">
+			alert("Registration success");
+		</c:if>		
 		$("#signin").on("click", loginValidation);
 	});
 
