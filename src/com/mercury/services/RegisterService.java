@@ -40,6 +40,13 @@ public class RegisterService {
 		userDao.addUser(user);
 	}
 	
+	public boolean isUserExist(String username) {
+		if(userDao.getUserByUsername(username) == null) {
+			return false;
+		}
+		return true;
+	}
+	
 	public void sendMail(String username, String email) {
 		final String fromMail = "m.yahoof201506@gmail.com";
 		final String password = "mercury201506";
