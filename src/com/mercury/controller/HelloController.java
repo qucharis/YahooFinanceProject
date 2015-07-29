@@ -251,6 +251,7 @@ public class HelloController {
 	
 	@RequestMapping(value="/history", method = RequestMethod.GET)
 	public ModelAndView historyPage() {
+		System.out.println("history.........................");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("history");
 		return mav;
