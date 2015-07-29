@@ -84,15 +84,53 @@ input.ng-invalid.ng-dirty{
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script><!-- angularJS Ajax call: http call -->
 <script src="js/bootstrap.js">
 </script>
+
+<!-- <script>
+/*
+	app.controller("registerController", function($scope, $interval, $http) {
+		// Initialization
+		
+		$interval(function() {
+			/* $http({
+				method: "GET",
+				url: "rest/market",
+			}).success(function(data) {
+				$scope.stocksArray = data;
+			}).error(function(data) {
+				alert("AJAX Error!");
+			}); */
+			$http({
+				method: "POST",
+				url: "rest/validate",
+				params: {name: "hello"}
+			}).success(function(data) {
+				
+			}).error(function(data) {
+				alert("AJAX Error!");
+			});
+		}, 2000);
+	});	
+</script> -->
+
 <script>
 	$(document).ready(function() {
 		if ("<c:out value='${param.login_error}'/>" != "") {
 			$('#wrongCredentials').show();
 		}
+		
+ 		<c:if test="${isUserExist}">
+		//$("#userExist").show();
+	    	alert("This user already exist!");
+			$("#signup").trigger("click");
+		</c:if>
+		<c:if test="${registerResult}">
+			alert("Registration success");
+		</c:if>		
 		$("#signin").on("click", loginValidation);
+		$("#r_signup").on("click", registerFormValidation);
 	});
 
-	function loginValidation() {
+	function loginValidation() { 
 		$("#usernameAndPasswordReq").hide();
 		$("#usernameReq").hide();
 		$("#passwordReq").hide();
@@ -113,7 +151,29 @@ input.ng-invalid.ng-dirty{
 	}
 	
 	
+	
+	
+	function registerFormValidation() {
+		/*$scope.registerResult;
+		$http({
+			method: "POST",
+			url: "rest/validate",
+			params: {name: $("#r_username").val()}
+		}).success(function(data) {
+			$scope.registerResult = data;
+		}).error(function(data) {
+			alert("AJAX Error!");
+		});
+		<c:if "$scope.registerResult">
+			$("#userExist").show();
+			return false;
+		</c:if> 
+		
+		return false;*/
+	}
+	
 </script>
+
 
 <script>
 	var app = angular.module('MyApp', []);
@@ -204,6 +264,9 @@ input.ng-invalid.ng-dirty{
 					<div class="alert alert-warning" id="wrongCredentials" style="display: none;">
 						<p><strong>Warning!</strong> User is not exist</p>
 					</div>
+					<div class="alert alert-warning" id="passwordLengthInvalid" style="display: none;">
+						<p><strong>Warning!</strong> Password length is not valid</p>
+					</div>
 				</div>
 				
 				<div class="form-group">
@@ -270,10 +333,7 @@ input.ng-invalid.ng-dirty{
 	
 	
 	<!-- Modal -->  
-  
-
-
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
       	<!-- modal header -->
@@ -337,7 +397,10 @@ input.ng-invalid.ng-dirty{
 
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default" >Sign Up</button>
+                <button type="submit" class="btn btn-default" id="r_signup">Sign Up</button>
+                 <%-- <c:if test="${isUserExist}">
+                	alert("I am an alert box!");
+				</c:if> --%>
               </div>
             </div>
           </form>
@@ -346,6 +409,8 @@ input.ng-invalid.ng-dirty{
       </div>
     </div>
   </div>
+	
+	
 	
 	
 	<div id="well" class="row">

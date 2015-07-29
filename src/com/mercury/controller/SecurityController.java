@@ -65,11 +65,16 @@ public class SecurityController {
 	}*/
 	
 	@RequestMapping(value="/register")
-	public String enroll(HttpServletRequest  request){
+	public ModelAndView enroll(HttpServletRequest  request){
 		String username = request.getParameter("r_username");
 		String password = request.getParameter("r_password");
 		String email = request.getParameter("r_email");
-		
+		ModelAndView mav = new ModelAndView();
+		if(rs.isUserExist(username)) {
+			mav.setViewName("login");
+			mav.addObject("isUserExist", "true");
+			return mav;
+		}
 		/*String firstname = request.getParameter("r_firstname");
 		String lastname = request.getParameter("r_lastname");
 		String phone = request.getParameter("r_phone");
@@ -91,6 +96,10 @@ public class SecurityController {
 		trader.setHome_state(home_state);*/
 		rs.register(user);
 		rs.sendMail(username, email);
-		return "success";
+		
+		//mav.setViewName("success");
+		mav.setViewName("login");
+		mav.addObject("registerResult", "true");
+		return mav;
 	}
 }
