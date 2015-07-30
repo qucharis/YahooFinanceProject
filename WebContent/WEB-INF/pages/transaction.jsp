@@ -80,8 +80,35 @@ angular.module("mainModule", [])
 
 </head>
 <body ng-app="mainModule">
+
+<div class="navbar navbar-default navbar-static-top">
+	<div class="container">
+		<a class="navbar-header" href="/YahooFinanceProject/login.html"><img src="images/dollar2.jpg" height="50" width="50"></a> 
+		<a class="navbar-header" class="navbar-header" href="/YahooFinanceProject/login.html"> 
+			<span class="yahoo">YAHOO</span> <span class="finance">FINANCE</span>
+		</a>
+		
+		<button class="navbar-toggle" data-toggle= "collapse" data-target= ".navHeaderCollapse">
+			<span class= "icon-bar"></span>
+			<span class= "icon-bar"></span>
+			<span class= "icon-bar"></span>
+		</button>
+		
+		<div class= "collapse navbar-collapse navHeaderCollapse">
+			<ul id= "menu" class= "nav navbar-nav navbar-right">
+				<li><a href = "/YahooFinanceProject/main.html">Portfolio</a></li>
+				<li class= "active"><a href = "/YahooFinanceProject/transaction.html">Transaction</a></li>
+				<li><a href = "/YahooFinanceProject/marketdata.html">Market data</a></li>
+				<li><a href = "/YahooFinanceProject/history.html">History</a></li>
+				<li><a href="<c:url value='/j_spring_security_logout'/>">Logout</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+
 <button id="buy" data-toggle="modal" data-target="#myModal1" type="submit" class="btn btn-primary btn-lg">Buy</button>
-<button id="sell" data-toggle="modal" data-target="#myModal2" type="submit" class="btn btn-primary btn-lg">Sell</button>
+<button id="sell" display = "inline"data-toggle="modal" data-target="#myModal2" type="submit" class="btn btn-primary btn-lg">Sell</button>
 
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
