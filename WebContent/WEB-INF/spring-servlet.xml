@@ -49,6 +49,7 @@
     <!-- Service Injection -->
     <bean id="tranSS" class="com.mercury.services.TransactionService"/>
     <bean id="ss" class="com.mercury.services.StockService"/>
+    <bean id="cs" class="com.mercury.services.CustomerService"/>
     
     <!-- Define Daos -->
     <!--  

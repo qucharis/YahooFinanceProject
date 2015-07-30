@@ -1,6 +1,7 @@
 package com.mercury.beans;
 
 public class StockInfo extends Stock {
+	private int amount;
 	private double pricechange;
 	private double currentPrice;
 	private int currentVolume;
@@ -42,5 +43,13 @@ public class StockInfo extends Stock {
 
 	public void setCurrentVolume(int currentVolume) {
 		this.currentVolume = currentVolume;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 }

@@ -283,20 +283,16 @@ input.ng-invalid.ng-dirty{
         </div>
         <!-- modal body -->
         <div class="modal-body">
-          <form class="form-horizontal" name="registerform" onSubmit="md5Encrypt(this)" role="form" action="register.html" method="POST" id="register-form">
+          <form class="form-horizontal" name="registerform" onSubmit="md5Encrypt(this)" role="form" id="register-form">
           <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Required Field</strong></div>
           	<!-- Username -->
           	<div class="form-group">
               <label for="r_username" class="col-sm-2 control-label">Username:</label>
-              <span class="glyphicon glyphicon-asterisk"></span>
+              <span class="glyphicon glyphicon-asterisk">test</span>
               
-              <div class="col-sm-6">
-                <input type="text" class="form-control" name="r_username" id="r_username" ng-model="user.username" placeholder="Username" required>
-                <span class="col-md-4" ng-show="registerform.r_username.$dirty && registerform.r_username.$invalid">Required</span>
-              </div>
-           </div> 
+			</div> 
             
-            <div class="alert" style="display:none;" id="userExist">
+			<div class="alert" style="display:none;" id="userExist">
 	        <p>The user already exists</p>
             </div>
           
@@ -318,21 +314,10 @@ input.ng-invalid.ng-dirty{
           <div class="col-sm-6">          
           <input type="password" class="form-control" name="r_r_password" id="r_r_password" ng-model="user.r_r_password" password-verify="user.r_password" placeholder="Re-enter password must between 6 to 20" required ng-minlength="6" ng-maxlength="20">
           </div>
-         <span class="col-md-4" ng-show="registerform.r_r_password.$dirty && registerform.r_r_password.$error.required">Required</span>
-         <span class="col-md-4" ng-show="registerform.r_r_password.$dirty && registerform.r_r_password.$error.passwordVerify">Password does not match</span>
            <span class="col-md-4" ng-show="registerform.password.$dirty && (registerform.password.$error.minlength || registerform.password.$error.maxlength)">6 to 20 characters</span>
           <!-- <button type="button" onclick="check()" value="Check">Check</button> -->
         </div>
 
-            <div class="form-group">
-              <label for="r_email" class="col-sm-2 control-label">Email:</label>
-              <span class="glyphicon glyphicon-asterisk"></span>
-              <div class="col-sm-6">
-                <input type="email" class="form-control" name="r_email" id="r_email" ng-model="user.r_email" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/"  placeholder="Email" required>
-                    <span class="col-md-4" ng-show="registerform.r_email.$dirty && registerform.r_email.$error.required">Required</span>
-                    <span class="col-md-4" ng-show="registerform.r_email.$dirty && registerform.r_email.$error.email">Invalid Email</span>
-              </div>
-            </div>
             
 
             <div class="form-group">
