@@ -16,10 +16,6 @@
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script><!-- angularJS Ajax call: http call -->
 <title>Transaction Service Test</title>
 <style type="text/css"> 
-	#well{
-		margin-left: 15px;
-		margin-right: 15px;
-	}
 </style>
 
 <script>
@@ -100,15 +96,14 @@ angular.module("mainModule", [])
         	</div>
         	<!-- modal body -->
         	<div class="modal-body" ng-controller="mainController">
-        		<div  class="alert">{{welcomeMsg}}</div>
+        		
           		<form class="form-horizontal" ng-submit="sellRequest(request, 'ajaxResult')" novalidate>
-          			<div class="well well-sm">
-          				<strong>
-          					<span class="glyphicon glyphicon-asterisk"></span>
-          					Required Field
-          				</strong>
+          			<div class = "panel panel-default">
+          				<div class = "panel-body bg-primary">{{welcomeMsg}}</div>
           			</div>
+          			
           			<!-- Username -->
+
           			<div class="form-group">
              				<label for="StockCode" class="col-sm-2 control-label">Stock Code:</label>
              				<span class="glyphicon glyphicon-asterisk"></span>
@@ -134,6 +129,12 @@ angular.module("mainModule", [])
                					placeholder="Amount" name ="amount" required >
  	            			</div>
    	        		</div>
+   	        		<div class="well well-sm">
+          				<strong>
+          					<span class="glyphicon glyphicon-asterisk"></span>
+          					Required Field
+          				</strong>
+          			</div>
 
        	    		<div class="form-group">
            	  			<div class="col-sm-offset-2 col-sm-10">
@@ -159,14 +160,11 @@ angular.module("mainModule", [])
         	</div>
         	<!-- modal body -->
         	<div class="modal-body" ng-controller="mainController">
-        		<div class = "alert">{{welcomeMsg}}</div>
           		<form class="form-horizontal" ng-submit="buyRequest(request, 'ajaxResult')" novalidate>
-          			<div class="well well-sm">
-          				<strong>
-          					<span class="glyphicon glyphicon-asterisk"></span>
-          					Required Field
-          				</strong>
+          			<div class = "panel panel-default">
+          				<div class = "panel-body bg-primary">{{welcomeMsg}}</div>
           			</div>
+          			
           			<!-- Username -->
           			<div class="form-group">
              				<label for="StockCode" class="col-sm-2 control-label">Stock Code:</label>
@@ -175,7 +173,6 @@ angular.module("mainModule", [])
                				<input type="text" class="form-control"
                					id="code" ng-model="request.code" 
                					placeholder="StockCode" name="code" required>
-               				
              				</div>
           				</div> 
            
@@ -193,6 +190,12 @@ angular.module("mainModule", [])
                					placeholder="Amount" name ="amount" required >
  	            			</div>
    	        		</div>
+   	        		<div class="well well-sm">
+          				<strong>
+          					<span class="glyphicon glyphicon-asterisk"></span>
+          					Required Field
+          				</strong>
+          			</div>
 
        	    		<div class="form-group">
            	  			<div class="col-sm-offset-2 col-sm-10">
