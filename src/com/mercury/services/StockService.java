@@ -20,11 +20,29 @@ public class StockService {
 	public void addStock(Stock stock){
 		sd.addStock(stock);
 	}
-	public void deleteStock(String code){
-		for (Stock s:sd.queryAll()){
-			if (s.getScode().equalsIgnoreCase(code));
-			sd.deleteStock(s);
+	public void deleteStock(Stock stock){
+		sd.deleteStock(stock);
+	}
+	
+	//for Admin to judge whether the stock is existed or not
+	public boolean isExisted(Stock stock) {
+		Set<Stock> stocks = sd.queryAll();
+		for(Stock st:stocks) {
+			if(stock.getScode().equalsIgnoreCase(st.getScode()) || stock.getStockName().equalsIgnoreCase(st.getStockName())) {
+				return true;
+			}
 		}
+		return false;
+	}
+	
+	//for Admin to remove stock
+	public Stock getStockByScode(String scode) {
+		return sd.getStockByStockCode(scode);
+	}
+	
+	//To get all stocks in the stocks table
+	public Set<Stock> getAllStocks() {
+		return sd.queryAll();
 	}
 	
 	public StockInfo getStockInfoBCode(String code){
@@ -44,7 +62,8 @@ public class StockService {
 	public double getPrice(Stock stock){
 		return getInfo(stock).getCurrentPrice();
 	}
-
+	
+	//get real time stockInfo
 	public Set<StockInfo> getInfo(Set<Stock> stocks) {
 		Set<StockInfo> sf = new HashSet<StockInfo>();
 		for (Stock s : stocks) {
@@ -52,7 +71,8 @@ public class StockService {
 		}
 		return sf;
 	}
-
+	
+	//get real time market data
 	public StockInfo getInfo(Stock stock) {
 
 		String stockCode = stock.getScode();
@@ -66,13 +86,11 @@ public class StockService {
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					urlconn.getInputStream()));
 			String content = in.readLine();
-			System.out.println(content);
+			//System.out.println(content);
 			content = content.replace((char) 34, (char) 32);
 			String[] tokens = content.split(",");
 			si.setPricechange(Double.parseDouble(tokens[tokens.length - 2].trim()));
 			si.setCurrentPrice(Double.parseDouble(tokens[tokens.length - 1].trim()));
-			si.setCurrentVolume(Integer.parseInt(tokens[tokens.length - 3]
-					.trim()));
 
 		} catch (Exception e) {
 			e.printStackTrace();
