@@ -25,13 +25,16 @@ public class AdminService {
 
 	private StockService ss;
 	
-	public void addStock(String name, String code){
+	public void addStockByCode(String name, String code){
 		ss.addStock(new Stock(name,code));
 	}
-	
-	public void deleteStock(String code){
-		ss.deleteStock(code);
+	public void addStock(Stock stock){
+		ss.addStock(stock);
 	}
+	
+/*	public void deleteStockByCode(String code){
+		ss.deleteStock(code);
+	}*/
 
 	public void parseAllRequsets() {
 		String target_dir = "D:/serverfiles";

@@ -1,7 +1,5 @@
 package com.mercury.controller;
 
-
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -233,6 +231,27 @@ public class HelloController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("admin");
 		mav.addObject("title", "Welcome back admin " + adminName);
+		return mav;
+	}
+	
+	@RequestMapping(value="/transaction", method = RequestMethod.GET)
+	public ModelAndView transactionPage() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("transaction");
+		return mav;
+	}
+	
+	@RequestMapping(value="/marketdata", method = RequestMethod.GET)
+	public ModelAndView marketdataPage() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("marketdata");
+		return mav;
+	}
+	
+	@RequestMapping(value="/history", method = RequestMethod.GET)
+	public ModelAndView historyPage() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("history");
 		return mav;
 	}
 	

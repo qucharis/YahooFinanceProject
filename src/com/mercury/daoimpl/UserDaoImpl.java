@@ -54,6 +54,8 @@ public class UserDaoImpl implements UserDao {
 		String hql = "from User as user where user.userName ='" + userName + "'";
 		@SuppressWarnings("unchecked")
 		List<User> users = template.find(hql);
+		if(users.size() == 0)
+			return null;
 		return users.get(0);
 
 	}
