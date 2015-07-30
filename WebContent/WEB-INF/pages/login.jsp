@@ -6,16 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Yahoo Finance System</title>
-<link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 
 <style type="text/css">
-img {
-	vertical-align: middle;
-	display: inline-block;
-}
 
 .alert {
 	color: red;
@@ -45,13 +40,7 @@ footer {
 	background-color: #d0e4fe;
 	padding: 10px;
 }
-h2{
-    margin: 0;     
-    color: #666;
-    padding-top: 90px;
-    font-size: 52px;
-    font-family: "trebuchet ms", sans-serif;    
-}
+
 .item{
     background: #333;    
     text-align: center;
@@ -61,13 +50,13 @@ h2{
     margin-top: -18px;
 }
 .slide_pic{
-	margin-left: 30px;
-	margin-right: 30px;
+	margin-left: 55px;
+	margin-right: 55px;
 	margin-bottom:20px;
 }
 #well{
-	margin-left: 15px;
-	margin-right: 15px;
+	margin-left: 40px;
+	margin-right: 40px;
 }
 input.ng-invalid.ng-dirty{
 	border: 2px solid #FF6666;
@@ -89,6 +78,14 @@ input.ng-invalid.ng-dirty{
 		if ("<c:out value='${param.login_error}'/>" != "") {
 			$('#wrongCredentials').show();
 		}
+		
+ 		<c:if test="${isUserExist}">
+	    	alert("This user already exist!");
+			$("#signup").trigger("click");
+		</c:if>
+		<c:if test="${registerResult}">
+			alert("Registration success");
+		</c:if>		
 		$("#signin").on("click", loginValidation);
 	});
 
@@ -176,21 +173,19 @@ input.ng-invalid.ng-dirty{
 
 </head>
 <body ng-app="MyApp">
-	<!-- <h1><font class="label label-primary">Login with Username and Password</font></h1>
-	 -->
-	<!-- Alerts for missing form info  -->
-	<nav class="navbar navbar-default">
+	<!-- navigation bar -->
+	<div class="navbar navbar-default navbar-static-top">
 		<!-- Login Form -->
-		<div class="container-fluid">
+		<div class="container">
 			<a class="navbar-header" href="/YahooFinanceProject/login.html"><img src="images/dollar2.jpg" height="50" width="50"></a> 
-			<a class="navbar-brand" href="/YahooFinanceProject/login.html"> 
+			<a class="navbar-header" href="/YahooFinanceProject/login.html"> 
 				<span class="yahoo">YAHOO</span> <span class="finance">FINANCE</span>
 			</a>
 				
 			<form class="navbar-form navbar-right" name="f"
 				action="<c:url value='j_spring_security_check'/>" method="POST"
 				id="login-form">
-				
+				<!-- Alerts for missing form info  -->
 				<div>
 					<div class="alert alert-warning" style="display: none;" id="usernameAndPasswordReq">
 						<p><strong>Warning!</strong> Username and password are required</p>
@@ -208,22 +203,15 @@ input.ng-invalid.ng-dirty{
 				
 				<div class="form-group">
 					<input class="form-control" value="" type="text" name="j_username" id="j_username" placeholder="Username" />
-				</div>
-				<div class="form-group">
 					<input class="form-control" value="" type="password" name="j_password" id="j_password" placeholder="Password" />
-				</div>
-				<div class="form-group">
 					<button type="reset" class="btn btn-success">Clear</button>
-				</div>
-				<div class="form-group">
 					<button id="signin" type="submit" class="btn btn-warning">
 						<span class="glyphicon glyphicon-user"></span>Sign In
 					</button>
 				</div>
-
 			</form>
 		</div>
-	</nav>
+	</div>
 	
 	<div class="slide_pic">
     <div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel">
@@ -267,11 +255,8 @@ input.ng-invalid.ng-dirty{
     </div>
 </div>
 	
-	
-	
-	<!-- Modal -->  
-  
 
+	<!-- Modal -->  
 
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
