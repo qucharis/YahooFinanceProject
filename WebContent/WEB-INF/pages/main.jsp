@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
@@ -26,6 +26,11 @@
 	font-family: 'Orbitron', sans-serif;
 	font-weight: 700;
 }
+table {
+    width:20%;
+    font-size: 120%;
+}
+
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
@@ -77,6 +82,15 @@
 </div>
 
 <h1><font color="blue">${ownershipInfo.message}</font></h1>
+
+<table id="tbl">
+	<tr>
+		<th>Your Balance: <span id = "para1" style="color:red">${balance}</span></th>
+		<th><button id="submit1">Add Money</button></th>
+	</tr>
+</table>
+<br/>
+<%-- <h3>Your Balance: ${balance} <span><button id="submit1">Add Money</button></span></h3> --%>
 <table width="200" border="1">
 	<tr>
 		<th>Stock Name</th>

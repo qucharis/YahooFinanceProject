@@ -222,6 +222,7 @@ public class HelloController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main");
 		mav.addObject("ownershipInfo", us.getOwnershipInfoByUserName(userName));
+		mav.addObject("balance", us.getBalance(userName));
 		return mav;
 	}
 	
