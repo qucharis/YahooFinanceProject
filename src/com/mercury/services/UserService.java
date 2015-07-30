@@ -1,5 +1,6 @@
 package com.mercury.services;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 import com.mercury.beans.OwnershipInfo;
@@ -15,7 +16,15 @@ public class UserService {
 	public void setUd(UserDao ud) {
 		this.ud = ud;
 	}
-
+	
+	public void addBalance(String userName) {
+		
+	}
+	
+	public BigDecimal getBalance(String userName) {
+		return ud.getUserByUsername(userName).getBalance();
+	}
+	
 	public OwnershipInfo getOwnershipInfoByUser(User user) {
 		// TODO Auto-generated method stub
 		//ud.addUser(user);
