@@ -6,12 +6,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
@@ -30,6 +33,7 @@ public class CustomerService {
 	private StockDao sd;
 	
 	
+	@SuppressWarnings("deprecation")
 	public Set<Transaction> queryPending(User user){
 		Set<Transaction> set = new HashSet<Transaction>();
 		
@@ -42,12 +46,13 @@ public class CustomerService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		if (list != null) {
 			for (String[] s : list) {
 				set.add (new Transaction(ud.getUserById(Integer.valueOf(s[0])),
 						sd.getStockByStockID(Integer.valueOf(s[1])),
 						Integer.valueOf(s[2]), BigDecimal.valueOf(Double.valueOf(s[3])),
-						Timestamp.valueOf(s[4])));
+						new Timestamp(Date.parse(s[4]))));
 			}
 			return set;
 		}
@@ -55,14 +60,19 @@ public class CustomerService {
 	}
 	
 	public void requestExchange(StockInfo stockInfo, User user, int amount) {
-		String[] request = new String[5];
+		String[] request = new String[6];
 		String fileName = "D:/serverfiles/" + user.getUserId() + "_requests.csv";
 		List<String[]> list = new ArrayList<String[]>();
+		Date date= new Date();
 		request[0] = String.valueOf(user.getUserId());
 		request[1] = String.valueOf(stockInfo.getSid());
 		request[2] = String.valueOf(amount);
 		request[3] = String.valueOf(stockInfo.getCurrentPrice());
-		request[4] = (new Timestamp((new java.util.Date()).getTime())).toString();
+		request[4] = date.toString();
+		System.out.println(request[4]);
+		
+		
+	
 		
 		try {
 			CSVReader cr = new CSVReader(new FileReader(fileName));
@@ -72,6 +82,7 @@ public class CustomerService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		try {
 			CSVWriter cw = new CSVWriter(new FileWriter(fileName));
 			cw.writeAll(list);
@@ -82,7 +93,13 @@ public class CustomerService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+
+		
+		
+		
 	}
+	
 	
 	
 	

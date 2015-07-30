@@ -30,6 +30,7 @@
     <servlet-mapping>
         <servlet-name>spring</servlet-name>
         <url-pattern>*.html</url-pattern>
+        <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
     
 	<!-- Listener class and params -->
