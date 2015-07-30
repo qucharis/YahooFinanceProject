@@ -87,7 +87,7 @@ public class SecurityController {
 		user.setEmail(email);
 		user.setAuthority("ROLE_USER");
 		user.setBalance(new BigDecimal(0));
-		user.setEnable(1);
+		user.setEnable(0);
 		
 		/*trader.setPhone(phone);
 		trader.setAddress(address);
