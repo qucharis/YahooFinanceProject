@@ -11,6 +11,15 @@
 <link href="css/bootstrap.css" rel="stylesheet">
 
 <style type="text/css">
+h3 {
+	color: #5CDEF2;
+	text-align:center;
+	font-family: 'Orbitron', sans-serif;
+	letter-spacing: 2px;
+	font-family: 'Unkempt', cursive;
+	font-weight: 700;
+}
+
 .yahoo {
 	color: green;
 	font-size: 36px;
@@ -26,14 +35,50 @@
 	font-family: 'Orbitron', sans-serif;
 	font-weight: 700;
 }
+
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  margin-left:auto; 
+  margin-right:auto;
+  padding: 15px;
+}
+
+th	{
+    background-color: black;
+    color: white;
+}
+
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script><!-- angularJS Ajax call: http call -->
 <script src="js/bootstrap.js"></script>
 
+<script>
+	angular.module("mainModule", []).controller("mainController", function($scope, $interval, $http) {
+		// Initialization
+		$scope.historyArray = [];
+		//$interval(function() {
+			$http({
+				method: "POST",
+				url: "rest/historyrecord",
+				params: {name: "guodong"},
+				data: "hello",
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+			}).success(function(data) {
+				$scope.historyArray = data;
+			}).error(function(data) {
+				alert("AJAX Error!");
+			});
+		//}, 2000);
+	});	
+</script>
+
 </head>
-<body>
+
+<body ng-app="mainModule">
+
 <div class="navbar navbar-default navbar-static-top">
 	<div class="container">
 		<a class="navbar-header" href="/YahooFinanceProject/login.html"><img src="images/dollar2.jpg" height="50" width="50"></a> 
@@ -58,6 +103,42 @@
 		</div>
 	</div>
 </div>
+
+	<div ng-controller="mainController">
+		<h3>Hello {{historyArray[0].user.userName}}, this is your transaction history</h3>
+		<div class="table-responsive"> 
+			<table id="stockList" border="1" style="width: 500px class="table table-striped table-bordered table-hover table-responsive"">
+				<tr>
+					<th></th>
+					<th>stock code</th>
+					<th>stock name</th>
+					<th>amount</th>
+					<th>unit price</th>
+					<th>transaction time</th>
+					
+				</tr>
+				<tr ng-repeat="history in historyArray">
+					<td ng-if="$odd" style="background-color:#f1f1f1">{{ $index + 1 }}</td>
+					<td ng-if="$even">{{ $index + 1 }}</td>
+					<td ng-if="$odd" style="background-color:#f1f1f1">{{history.stock.scode | uppercase}}</td>
+					<td ng-if="$even">{{history.stock.scode | uppercase}}</td>
+					<td ng-if="$odd" style="background-color:#f1f1f1">{{history.stock.stockName}}</td>
+					<td ng-if="$even">{{history.stock.stockName}}</td>
+					<td ng-if="$odd" style="background-color:#f1f1f1">{{history.amount}}</td>
+					<td ng-if="$even">{{history.amount}}</td>
+					<td ng-if="$odd" style="background-color:#f1f1f1">{{history.unitprice}}</td>
+					<td ng-if="$even">{{history.unitprice}}</td>
+					<td ng-if="$odd" style="background-color:#f1f1f1">{{history.time}}</td>
+					<td ng-if="$even">{{history.time}}</td>
+					<%-- <td>
+						<b ng-if="stock.change>0" style="color:green">{{stock.change}}</b>
+						<b ng-if="stock.change<0" style="color:red">{{stock.change}}</b>
+						<b ng-if="stock.change==0" style="color:black">{{stock.change}}</b>
+					</td> --%>
+				</tr>
+			</table>
+		</div>
+	</div>
 
 </body>
 </html>

@@ -26,7 +26,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void updateUser(User user) {
 		// TODO Auto-generated method stub
-		
+		template.update(user);
 	}
 	
 	@Override

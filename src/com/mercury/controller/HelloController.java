@@ -256,7 +256,16 @@ public class HelloController {
 		mav.setViewName("history");
 		return mav;
 	}
-	
+	@RequestMapping(value="/activateAccount", method = RequestMethod.GET)
+	public ModelAndView activeMail(HttpServletRequest request) {
+		String username = request.getParameter("username");
+		User user = ud.getUserByUsername(username);
+		user.setEnable(1);
+		ud.updateUser(user);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("active_confirm");
+		return mav;
+	}
 //	@RequestMapping(value="/main", method = RequestMethod.GET)
 //	@ResponseBody
 //	public String mainPage() {
