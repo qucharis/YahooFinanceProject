@@ -17,8 +17,11 @@ public class UserService {
 		this.ud = ud;
 	}
 	
-	public void addBalance(String userName) {
-		
+	public void addBalance(String userName, BigDecimal addMoney) {
+		User user =ud.getUserByUsername(userName);
+		double newBalance =user.getBalance().doubleValue() + addMoney.doubleValue();
+		user.setBalance(new BigDecimal(newBalance));
+		ud.updateUser(user);
 	}
 	
 	public BigDecimal getBalance(String userName) {
@@ -54,6 +57,9 @@ public class UserService {
 	
 	public User getUser(int id){
 		return ud.getUserById(id);
+	}
+	public User getUser(String userName){
+		return ud.getUserByUsername(userName);
 	}
 	
 	public User getUserByEmail(String email){

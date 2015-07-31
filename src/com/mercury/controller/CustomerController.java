@@ -1,5 +1,6 @@
 package com.mercury.controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.FormParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,6 +48,16 @@ public class CustomerController {
 	@Autowired
 	private UserService us;
 
+	@RequestMapping(value="/addBal", method=RequestMethod.POST)
+	@ResponseBody
+	public BigDecimal addBalance(@FormParam("amount") BigDecimal amount) {
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		//System.out.println(amount);
+		//if()
+		us.addBalance(userName, amount);
+		return us.getBalance(userName);
+	}
+	
 	@RequestMapping(value="/buySub", method=RequestMethod.POST)
 	@ResponseBody
 	public String BuyingSubmmition(@FormParam("code") String code,@FormParam("amount") Integer amount) {

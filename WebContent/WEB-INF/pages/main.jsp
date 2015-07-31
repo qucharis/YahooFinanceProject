@@ -9,6 +9,7 @@
 <link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
 <link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-theme.min.css" rel="stylesheet">
 
 <style type="text/css">
 .yahoo {
@@ -30,7 +31,12 @@ table {
     width:20%;
     font-size: 120%;
 }
-
+.alert {
+	display:none;
+}
+#addSuccess {
+	color:red;
+}
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
@@ -38,23 +44,51 @@ table {
 <script src="js/bootstrap.js"></script>
 
 <script>
-//change active class
-/* $(document).ready(function() {
-	$('.navbar li').click(function() {
-	    $('.navbar li.active').removeClass('active');
-	    var $this = $(this);
-	    if (!$this.hasClass('active')) {
-	        $this.addClass('active');
-	    }
-	});
-}); */
-
-
+angular.module("mainModule", [])
+	.controller("mainController", function ($scope, $http) {
+  		$scope.request = {
+  			amount: 0
+  		};
+  		$scope.currentbalance = $("#remoteBalance").text();
+  		$scope.welcomeMsg = "Please enter the Money you want to add";
+  		//$scope.canShow = false;	    
+		$scope.addMoneyRequest = function (request, resultVarName) {
+		    var params = $.param({
+	        	amount: request.amount
+		    });
+		    //var msg;
+    		$http({
+    			method: "POST",
+    			url: "rest/addBal",
+    			data: params,
+    			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    		}).success(function (data, status, headers, config) {
+    			$scope[resultVarName] = data;
+    			request.amount = 0;
+    			$scope.currentbalance = data;
+    			//$scope.welcomeMsg = data; 
+      		}) .error(function (data, status, headers, config) {
+        		$scope[resultVarName] = "SUBMIT ERROR";
+      		});
+  		}; 
+	});	
 </script>
 
+<script>
+$(document).ready(function() {
+	$("input[type='number']").on("blur",function(){
+ 		var amount = $("#amount").val();
+		if(amount>0){
+			$("#confirm").removeAttr("disabled");
+		}else{
+			 $("#confirm").attr("disabled", "disabled");
+		}
+	});
+});
+</script>
 
 </head>
-<body>
+<body ng-app="mainModule" ng-controller="mainController">
 
 <div class="navbar navbar-default navbar-static-top">
 	<div class="container">
@@ -83,10 +117,14 @@ table {
 
 <h1><font color="blue">${ownershipInfo.message}</font></h1>
 
+<div style="display:none">
+	<p id="remoteBalance">${balance}</p> <!-- jsp expression -->
+</div>
+
 <table id="tbl">
 	<tr>
-		<th>Your Balance: <span id = "para1" style="color:red">${balance}</span></th>
-		<th><button id="submit1">Add Money</button></th>
+		<th>Your Balance: <span id="j_name" style="color:red">{{currentbalance}}</span></th>
+		<th><button id="addmoney" data-toggle="modal" data-target="#balModal" class="btn btn-primary">Add Money</button></th>
 	</tr>
 </table>
 <br/>
@@ -103,6 +141,57 @@ table {
 		</tr>
 	</c:forEach>
 </table>
+
+<!-- Add Money Modal -->
+<div class="modal fade"	id="balModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- modal header -->
+			<div class="modal-header">
+				<button type="button" class="close" ng-click="myStyle={'display':'none'}" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+          		<h4 class="modal-title" id="myModalLabel">Adding Money</h4>
+			</div>
+			<!-- modal body -->
+			<div class="modal-body">
+				<form class="form-horizontal" ng-submit="addMoneyRequest(request, 'ajaxResult')" novalidate>
+          			<div class = "panel panel-default">
+          				<div class = "panel-body bg-primary">{{welcomeMsg}}</div>
+          			</div>
+          			<!-- Amount --> 
+         			<div class="form-group">
+             				<label for="amount" class="col-sm-2 control-label">Amount:</label>
+             				<span class="glyphicon glyphicon-asterisk"></span>
+             				<div class="col-sm-6">
+               				<input type="number" class="form-control" id="amount" 
+               					ng-model="request.amount" 
+               					placeholder="Amount" name ="amount" required>
+ 	            			</div>
+   	        		</div>
+<!--    	        		<div class="well well-sm">
+          				<strong>
+          					<span class="glyphicon glyphicon-asterisk"></span>
+          					Required Field
+          				</strong>
+          			</div> -->
+          			
+          			<!-- alert -->         
+           			<div class="alert" ng-style="myStyle" id="addSuccess">
+        				<p>Add Money Successfully</p>
+           			</div>
+		          	<!-- modal footer -->
+		    		<div class="modal-footer">
+		  	    		<div class="form-group">
+		      	  			<div class="col-sm-offset-2 col-sm-10">
+		          				<button class="btn btn-default" data-dismiss= "modal" ng-click="myStyle={'display':'none'}">Close</button>
+		          				<button disabled id="confirm" type="submit" class="btn btn-primary" ng-click="myStyle={'display':'block'}">Confirm</button>
+		        			</div>
+		      			</div>
+		    		</div>
+         		</form>
+			</div>
+		</div>
+	</div>
+</div>
 
 </body>
 </html>
