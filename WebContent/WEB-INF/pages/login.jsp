@@ -348,9 +348,9 @@ body,html {
 		</div>
 		<div class="col-md-6">
 			<div class="well">
-				<h3><span class="glyphicon glyphicon-globe"></span>Real-Time Market Data</h3>
-            	<p>You can watch the real-time market data which is refreshed every two seconds.</p>
-            	<p><a href="http://finance.yahoo.com" target="_blank" class="btn btn-danger btn-lg">Show Data</a></p>
+				<h3><span class="glyphicon glyphicon-globe"></span>Global Market Data</h3>
+            	<p>You can view the global market data in yahoo.com.</p>
+            	<p><a href="http://finance.yahoo.com/market-overview/" target="_blank" class="btn btn-danger btn-lg">Show Data</a></p>
             </div>
 		</div>
 	</div>
