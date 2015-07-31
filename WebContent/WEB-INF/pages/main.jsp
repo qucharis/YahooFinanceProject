@@ -49,6 +49,11 @@ angular.module("mainModule", [])
   		$scope.request = {
   			amount: 0
   		};
+  	    $scope.isAmountValid = function () {
+  	    	if($scope.request.amount>0)
+  	      	return true;
+  	    };
+  		
   		$scope.currentbalance = $("#remoteBalance").text();
   		$scope.welcomeMsg = "Please enter the Money you want to add";
   		//$scope.canShow = false;	    
@@ -72,19 +77,6 @@ angular.module("mainModule", [])
       		});
   		}; 
 	});	
-</script>
-
-<script>
-$(document).ready(function() {
-	$("input[type='number']").on("blur",function(){
- 		var amount = $("#amount").val();
-		if(amount>0){
-			$("#confirm").removeAttr("disabled");
-		}else{
-			 $("#confirm").attr("disabled", "disabled");
-		}
-	});
-});
 </script>
 
 </head>
@@ -153,7 +145,7 @@ $(document).ready(function() {
 			</div>
 			<!-- modal body -->
 			<div class="modal-body">
-				<form class="form-horizontal" ng-submit="addMoneyRequest(request, 'ajaxResult')" novalidate>
+				<form name="balForm" class="form-horizontal" ng-submit="addMoneyRequest(request, 'ajaxResult')" novalidate>
           			<div class = "panel panel-default">
           				<div class = "panel-body bg-primary">{{welcomeMsg}}</div>
           			</div>
@@ -183,7 +175,7 @@ $(document).ready(function() {
 		  	    		<div class="form-group">
 		      	  			<div class="col-sm-offset-2 col-sm-10">
 		          				<button class="btn btn-default" data-dismiss= "modal" ng-click="myStyle={'display':'none'}">Close</button>
-		          				<button disabled id="confirm" type="submit" class="btn btn-primary" ng-click="myStyle={'display':'block'}">Confirm</button>
+		          				<button ng-disabled="!isAmountValid()" id="confirm" type="submit" class="btn btn-primary" ng-click="myStyle={'display':'block'}">Confirm</button>
 		        			</div>
 		      			</div>
 		    		</div>
