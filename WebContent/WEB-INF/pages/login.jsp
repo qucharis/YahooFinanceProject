@@ -68,7 +68,7 @@ input.ng-invalid.ng-dirty{
 body,html {
 	height:100%;
 	width:100%;
-	overflow: hidden; 
+	overflow-x: hidden;
 }
 </style>
 <script
