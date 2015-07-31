@@ -33,8 +33,6 @@ public class HistoryController {
 	TransactionService transactionService;
 	@Autowired
 	UserDao userDao;
-	@Resource
-	private List<Stock> stocks;
 	
 	@RequestMapping(value="/historyrecord", method=RequestMethod.POST)
 	@ResponseBody
