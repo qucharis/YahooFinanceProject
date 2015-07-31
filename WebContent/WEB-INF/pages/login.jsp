@@ -65,7 +65,11 @@ input.ng-invalid.ng-dirty{
 .col-md-4 {
 	color: red;
 }
-
+body,html {
+	height:100%;
+	width:100%;
+	overflow: hidden; 
+}
 </style>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
@@ -359,6 +363,5 @@ input.ng-invalid.ng-dirty{
 			</footer>
 		</div>
 	</div>
-
 </body>
 </html>
