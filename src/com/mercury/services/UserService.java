@@ -32,7 +32,7 @@ public class UserService {
 		// TODO Auto-generated method stub
 		//ud.addUser(user);
 		OwnershipInfo ownershipInfo = new OwnershipInfo();
-		ownershipInfo.setMessage("Hello " + user.getUserName() + ", here are you owned stocks!");
+		ownershipInfo.setMessage("Welcome back " + user.getUserName() + ", here are you owned stocks:");
 		ownershipInfo.setOwnerships(user.getOwnerships());
 		return ownershipInfo;
 	}
@@ -41,7 +41,7 @@ public class UserService {
 		// TODO Auto-generated method stub
 		User user = ud.getUserById(userId);
 		OwnershipInfo ownershipInfo = new OwnershipInfo();
-		ownershipInfo.setMessage("Hello " + user.getUserName() + ", here are you owned stocks!");
+		ownershipInfo.setMessage("Welcome back " + user.getUserName() + ", here are you owned stocks:");
 		ownershipInfo.setOwnerships(user.getOwnerships());
 		return ownershipInfo;
 	}
@@ -50,7 +50,7 @@ public class UserService {
 		// TODO Auto-generated method stub
 		User user = ud.getUserByUsername(userName);
 		OwnershipInfo ownershipInfo = new OwnershipInfo();
-		ownershipInfo.setMessage("Hello " + user.getUserName() + ", here are you owned stocks!");
+		ownershipInfo.setMessage("Welcome back " + user.getUserName() + ", here are you owned stocks:");
 		ownershipInfo.setOwnerships(user.getOwnerships());
 		return ownershipInfo;
 	}
