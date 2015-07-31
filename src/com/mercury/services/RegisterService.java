@@ -1,11 +1,14 @@
 package com.mercury.services;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
 import javax.mail.BodyPart;
 import javax.mail.Message;
+import javax.mail.Message.RecipientType;
 import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -47,6 +50,34 @@ public class RegisterService {
 		return true;
 	}
 	
+    private static String md5(String string) {  
+        MessageDigest md = null;  
+        try {  
+            md = MessageDigest.getInstance("md5");  
+            md.update(string.getBytes());  
+            byte[] md5Bytes = md.digest();  
+            return bytes2Hex(md5Bytes);  
+        } catch (NoSuchAlgorithmException e) {  
+            e.printStackTrace();  
+        }  
+          
+        return null;  
+    }  
+      
+    private static String bytes2Hex(byte[] byteArray)  
+    {  
+        StringBuffer strBuf = new StringBuffer();  
+        for (int i = 0; i < byteArray.length; i++)  
+        {  
+            if(byteArray[i] >= 0 && byteArray[i] < 16)  
+            {  
+                strBuf.append("0");  
+            }  
+            strBuf.append(Integer.toHexString(byteArray[i] & 0xFF));  
+        }  
+        return strBuf.toString();  
+    }    
+	
 	public void sendMail(String username, String email) {
 		final String fromMail = "m.yahoof201506@gmail.com";
 		final String password = "mercury201506";
@@ -63,8 +94,23 @@ public class RegisterService {
         
         Session session = Session.getDefaultInstance(prop, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() { 
-		return new PasswordAuthentication(fromMail, password); 		} 
+            	return new PasswordAuthentication(fromMail, password);
+            	} 
             });
+        /*
+        MimeMessage message = new MimeMessage(session);  
+        try {  
+            message.setSubject("Account activation mail");  
+            message.setSentDate(new Date());  
+            message.setFrom(new InternetAddress(fromMail));  
+            message.setRecipient(RecipientType.TO, new InternetAddress(email)); 
+            String link = "http://localhost:8080/YahooFinanceProject/activateAccount?username=" + username + "&" + "checkcode" + "=" + md5(username);  
+            message.setContent("<a href='" + link +"'>Click to activate your account</a>","text/html;charset=utf-8");  
+            Transport.send(message);  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        } */ 
+        
         try {		
         	//create a default MimeMessage object
             Message msg = new MimeMessage(session);
@@ -82,19 +128,13 @@ public class RegisterService {
             // Create the message part
             BodyPart messageBodyPart = new MimeBodyPart();
             //now set the actual message
-            messageBodyPart.setText("Dear " + username +",\n\nWelcome to Yahoo Finance!");
+            /////messageBodyPart.setText("Dear " + username +",\n\nWelcome to Yahoo Finance!");
+            String link = "http://localhost:8080/YahooFinanceProject/activateAccount.html?username=" + username + "&" + "checkcode" + "=" + md5(username);  
+            messageBodyPart.setContent("<a href='" + link +"'>Click to activate your account</a>","text/html;charset=utf-8");  
             // Create a multipart message
             Multipart multipart = new MimeMultipart();
             //set text message part
             multipart.addBodyPart(messageBodyPart);
-        
-            // Part two is attachment
-            /*messageBodyPart = new MimeBodyPart();
-            String filename = "D:\\Mercury systems Inc\\status reports\\status_20150616.doc";
-            FileDataSource source = new FileDataSource(filename);
-            messageBodyPart.setDataHandler(new DataHandler(source));
-            messageBodyPart.setFileName(filename);
-            multipart.addBodyPart(messageBodyPart);*/
             
             //send the complete message parts
             msg.setContent(multipart);
