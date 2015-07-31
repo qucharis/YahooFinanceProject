@@ -15,32 +15,17 @@
         http://www.springframework.org/schema/util 
         http://www.springframework.org/schema/util/spring-util-3.0.xsd">
     <context:component-scan base-package="com.mercury.controller" />
-    <mvc:annotation-driven />
-    
-    <bean id="viewResolver"
-        class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-        <property name="viewClass"
-            value="org.springframework.web.servlet.view.JstlView" />
-        <property name="prefix" value="/WEB-INF/pages/" />
-        <property name="suffix" value=".jsp" />
-    </bean>
-    
+    <mvc:annotation-driven /> 
 
-    <!-- Dao Injection -->
+    <!-- Controller Injection -->
     <bean id="helloController" class="com.mercury.controller.HelloController">
         <property name="td" ref="transactionDao"/>
     	<property name="sd" ref="stockDao"/>
     	<property name="us" ref="userService"/>
     </bean>
-    
-    <bean id="registerService" class="com.mercury.services.RegisterService">
-    	<property name="userDao" ref="userDao"/>
-    </bean>
-    
-	<bean id="userService" class="com.mercury.services.UserService">
-    	<property name="ud" ref="userDao"/>
-    </bean>
-    
+
+
+    <!-- Dao Injection -->
     <bean id="transactionDao" class="com.mercury.daoimpl.TransactionDaoImpl">
     	<property name="sessionFactory" ref="sessionFactory"/>
     </bean>
@@ -53,15 +38,19 @@
     
 
     <!-- Service Injection -->
+    <bean id="registerService" class="com.mercury.services.RegisterService">
+    	<property name="userDao" ref="userDao"/>
+    </bean>
+    
+	<bean id="userService" class="com.mercury.services.UserService">
+    	<property name="ud" ref="userDao"/>
+    </bean>
     <bean id="tranSS" class="com.mercury.services.TransactionService"/>
     <bean id="ss" class="com.mercury.services.StockService"/>
+
+    <bean id="cs" class="com.mercury.services.CustomerService"/>
+    <bean id="as" class="com.mercury.services.AdminService"/>
     
-    <!-- Define Daos -->
-    <!--  
-	<bean id="userDao" class="com.mercury.daos.UserDao">
-    	<property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
-    -->
     
     <!-- Define DataSource and SessionFactory -->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"> <!-- annotation -->
@@ -85,33 +74,14 @@
     	<property name="jndiName" value="java:comp/env/jdbc/myoracle" />
 	</bean>
 	
-<!--     <util:list id="stocks">
-    	<bean class="com.mercury.model.Stock">
-    		<property name="id" value="BAC"/>
-    	</bean>
-    	<bean class="com.mercury.model.Stock">
-    		<property name="id" value="C"/>
-    	</bean>
-    	<bean class="com.mercury.model.Stock">
-    		<property name="id" value="BABA"/>
-    	</bean>
-    	<bean class="com.mercury.model.Stock">
-    		<property name="id" value="DRYS"/>
-    	</bean>
-    </util:list> -->
-   <util:list id="stocks"> <!-- util:set....util:map -->
-    	<bean class="com.mercury.beans.StockInfo">
-    		<property name="scode" value="BAC"/>
-    	</bean>
-    	<bean class="com.mercury.beans.StockInfo">
-    		<property name="scode" value="C"/>
-    	</bean>
-    	<bean class="com.mercury.beans.StockInfo">
-    		<property name="scode" value="BABA"/>
-    	</bean>
-    	<bean class="com.mercury.beans.StockInfo">
-    		<property name="scode" value="DRYS"/>
-    	</bean>
-    </util:list>
+	<!-- View Resolver -->
+    <bean id="viewResolver"
+        class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass"
+            value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/pages/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
 
 </beans>

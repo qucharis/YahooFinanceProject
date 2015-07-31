@@ -5,10 +5,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import au.com.bytecode.opencsv.CSVReader;
 
@@ -23,13 +25,16 @@ public class AdminService {
 
 	private StockService ss;
 	
-	public void addStock(String name, String code){
+	public void addStockByCode(String name, String code){
 		ss.addStock(new Stock(name,code));
 	}
-	
-	public void deleteStock(String code){
-		ss.deleteStock(code);
+	public void addStock(Stock stock){
+		ss.addStock(stock);
 	}
+	
+/*	public void deleteStockByCode(String code){
+		ss.deleteStock(code);
+	}*/
 
 	public void parseAllRequsets() {
 		String target_dir = "D:/serverfiles";
@@ -46,10 +51,13 @@ public class AdminService {
 			}
 			if (list != null) {
 				for (String[] s : list) {
-					ts.addTransaction(us.getUser(Integer.valueOf(s[0])),
+					ts.addTransaction(
+							us.getUser(Integer.valueOf(s[0])),
 							ss.getStockInfoById(Integer.valueOf(s[1])),
-							Integer.valueOf(s[2]), Double.valueOf(s[3]),
-							Timestamp.valueOf(s[4]));
+							Integer.valueOf(s[2]),
+							Double.valueOf(s[3]),
+							(new Timestamp(Date.parse(s[4])))
+							);
 				}
 			}
 		}

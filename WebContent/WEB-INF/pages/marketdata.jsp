@@ -1,16 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Market data</title>
-<link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Unkempt:400,700' rel='stylesheet' type='text/css'>
 <link href="css/bootstrap.css" rel="stylesheet">
 
 <style type="text/css">
+h3 {
+	color: #5CDEF2;
+	text-align:center;
+	font-family: 'Orbitron', sans-serif;
+	letter-spacing: 2px;
+	font-family: 'Unkempt', cursive;
+	font-weight: 700;
+}
+
 .yahoo {
 	color: green;
 	font-size: 36px;
@@ -26,14 +35,35 @@
 	font-family: 'Orbitron', sans-serif;
 	font-weight: 700;
 }
+
+table {
+	margin-left:auto; 
+    margin-right:auto;
+} 
+
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script><!-- angularJS Ajax call: http call -->
 <script src="js/bootstrap.js"></script>
-
+<script>
+	angular.module("mainModule", []).controller("mainController", function($scope, $interval, $http) {
+		// Initialization
+		$scope.stocksArray = [];
+		$interval(function() {
+			$http({
+				method: "GET",
+				url: "rest/market", 
+			}).success(function(data) {
+				$scope.stocksArray = data;
+			}).error(function(data) {
+				alert("AJAX Error!");
+			});
+		}, 2000);
+	});	
+</script>
 </head>
-<body>
+<body ng-app="mainModule">
 <div class="navbar navbar-default navbar-static-top">
 	<div class="container">
 		<a class="navbar-header" href="/YahooFinanceProject/login.html"><img src="images/dollar2.jpg" height="50" width="50"></a> 
@@ -59,5 +89,30 @@
 	</div>
 </div>
 
+<div ng-controller="mainController">
+	<h3>Real Time Market Data</h3>
+	<div class="table-responsive"> 
+		<table id="stockList" border="1" style="width: 500px" class="table table-striped table-bordered table-hover table-responsive">
+			<tr>
+				<th>Stock Code</th>
+				<th>Stock Name</th>
+				<th>Current Price</th>
+				<th>Price Change</th>
+			</tr>
+	
+			<tr ng-repeat="stock in stocksArray">
+				<td>{{stock.scode}}</td>
+				<td>{{stock.stockName}}</td>
+				<td>{{stock.currentPrice}}</td>
+				<td>
+					<b ng-if="stock.pricechange>0" style="color:green">{{stock.pricechange}}</b>
+					<b ng-if="stock.pricechange<0" style="color:red">{{stock.pricechange}}</b>
+					<b ng-if="stock.pricechange==0" style="color:black">{{stock.pricechange}}</b>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+	
 </body>
 </html>

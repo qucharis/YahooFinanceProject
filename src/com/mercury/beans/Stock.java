@@ -18,10 +18,10 @@ public class Stock {
 	public Stock() {
 		ownerships = new HashSet<Ownership>();
 	}
-	public Stock(String stockName, String scode) {
+	public Stock(String scode, String stockName) {
 		this();
-		this.stockName = stockName;
 		this.scode = scode;
+		this.stockName = stockName;
 	}
 	@Id
 	@GeneratedValue(generator = "stock_id_gen", 

@@ -39,6 +39,14 @@ public class StockDaoImpl implements StockDao {
 	}
 
 	@Override
+	public Stock getStockByStockCode(String scode) {
+		String hql = "from Stock as stock where stock.scode='" + scode + "'";
+		@SuppressWarnings("unchecked")
+		List<Stock> stock = template.find(hql);
+		return stock.get(0);
+	}
+	
+	@Override
 	public Set<Stock> queryAll() {
 		// TODO Auto-generated method stub
 		String hql = "from Stock";
