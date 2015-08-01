@@ -32,6 +32,8 @@ import org.springframework.web.servlet.ModelAndView;
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 
+import com.mercury.beans.Ownership;
+import com.mercury.beans.OwnershipInfo;
 import com.mercury.beans.Stock;
 import com.mercury.beans.StockInfo;
 import com.mercury.beans.User;
@@ -220,9 +222,18 @@ public class HelloController {
 	public ModelAndView mainPage() {
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 		ModelAndView mav = new ModelAndView();
+		OwnershipInfo owninfo = us.getOwnershipInfoByUserName(userName);
+		Set<StockInfo> infos = new HashSet<StockInfo>();
+		for (Ownership own : owninfo.getOwnerships()) {
+			StockInfo si = ss.getInfo(own.getStock());
+			si.setAmount(own.getQuantity());
+			infos.add(si);
+		}
+		
 		mav.setViewName("main");
-		mav.addObject("ownershipInfo", us.getOwnershipInfoByUserName(userName));
+		mav.addObject("ownershipInfo", owninfo);
 		mav.addObject("balance", us.getBalance(userName));
+		mav.addObject("stockInfos", infos);
 		return mav;
 	}
 	

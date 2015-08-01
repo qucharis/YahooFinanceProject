@@ -5,9 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Portfolio</title>
 <link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Unkempt:400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="css/style.css" type="text/css">
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 
@@ -27,9 +30,23 @@
 	font-family: 'Orbitron', sans-serif;
 	font-weight: 700;
 }
-table {
-    width:20%;
-    font-size: 120%;
+h2 {
+	color: #27A0C4;
+	margin-left: 3cm;
+	font-family: 'Unkempt', cursive;
+	font-weight: 700;
+}
+#tbl {
+	float: right;
+	font-size: 120%;
+	width:21%;
+	margin-right: 2.1cm;
+}
+#towns {
+	margin-left:auto; 
+    margin-right:auto;
+	width: 500px;
+	font-size: 100%;
 }
 .alert {
 	display:none;
@@ -37,11 +54,24 @@ table {
 #addSuccess {
 	color:red;
 }
+#chartdiv1 {
+	width:600px;
+	height:400px;
+	float: left;
+}
+#chartdiv2 {
+	width:600px;
+	height:400px;
+	float: right;
+}
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script><!-- angularJS Ajax call: http call -->
 <script src="js/bootstrap.js"></script>
+<script src="js/amcharts.js" type="text/javascript"></script>
+<script src="js/pie.js" type="text/javascript"></script>
+<jsp:useBean id="stockInfo" scope="request" class="com.mercury.beans.StockInfo"/>
 
 <script>
 angular.module("mainModule", [])
@@ -79,6 +109,69 @@ angular.module("mainModule", [])
 	});	
 </script>
 
+<script>
+var set1 = [];
+var set2 = [];
+</script>
+
+<c:forEach var="stockInfo" items="${stockInfos}">
+<script>
+ 	var up = ('${stockInfo.getCurrentPrice()}'*'${stockInfo.getAmount()}')|0;
+ 	var stock1 = {"stock":"${stockInfo.getStockName()}","price":'${stockInfo.getAmount()}'};
+ 	var stock2 = {"stock":"${stockInfo.getStockName()}",
+		 "value":up};
+	set1.push(stock1);
+ 	set2.push(stock2);
+</script>
+</c:forEach>
+<script>
+
+    var chart1;
+    var chartData1 = set1;
+    var chart2;
+    var chartData2 = set2;
+    
+    AmCharts.ready(function () {
+        // PIE CHART
+        chart1 = new AmCharts.AmPieChart();
+        chart2 = new AmCharts.AmPieChart();
+
+        // title of the chart
+        chart1.addTitle("Stock volume", 16);
+        chart2.addTitle("Stock value", 16);
+
+        chart1.dataProvider = chartData1;
+        chart1.titleField = "stock";
+        chart1.valueField = "price";
+        chart1.sequencedAnimation = true;
+        chart1.startEffect = "elastic";
+        chart1.innerRadius = "10%";
+        chart1.startDuration = 1;
+        chart1.labelRadius = 10;
+        chart1.balloonText = "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>";
+        // the following two lines makes the chart 3D
+        chart1.depth3D = 10;
+        chart1.angle = 5; 
+        
+        chart2.dataProvider = chartData2;
+        chart2.titleField = "stock";
+        chart2.valueField = "value";
+        chart2.sequencedAnimation = true;
+        chart2.startEffect = "elastic";
+        chart2.innerRadius = "10%";
+        chart2.startDuration = 1;
+        chart2.labelRadius = 10;
+        chart2.balloonText = "[[title]]<br><span style='font-size:14px'><b>$[[value]]</b> ([[percents]]%)</span>";
+        // the following two lines makes the chart 3D
+        chart2.depth3D = 10;
+        chart2.angle = 5;
+
+        // WRITE
+        chart1.write("chartdiv1");
+        chart2.write("chartdiv2");
+    });
+</script>
+
 </head>
 <body ng-app="mainModule" ng-controller="mainController">
 
@@ -107,21 +200,22 @@ angular.module("mainModule", [])
 	</div>
 </div>
 
-<h1><font color="blue">${ownershipInfo.message}</font></h1>
+<table id="tbl">
+	<tr>
+		<th><button id="addmoney" data-toggle="modal" data-target="#balModal" class="btn btn-primary btn-sm">Add Money</button></th>
+		<th>Your Balance: <span id="j_name" style="color:red">{{currentbalance}}</span></th>
+	</tr>
+</table>
+
+<h2><font>${ownershipInfo.message}</font></h2>
 
 <div style="display:none">
 	<p id="remoteBalance">${balance}</p> <!-- jsp expression -->
 </div>
 
-<table id="tbl">
-	<tr>
-		<th>Your Balance: <span id="j_name" style="color:red">{{currentbalance}}</span></th>
-		<th><button id="addmoney" data-toggle="modal" data-target="#balModal" class="btn btn-primary">Add Money</button></th>
-	</tr>
-</table>
-<br/>
+
 <%-- <h3>Your Balance: ${balance} <span><button id="submit1">Add Money</button></span></h3> --%>
-<table width="200" border="1">
+<table id="towns" width="200" border="1" class="table table-striped table-bordered table-hover table-responsive">
 	<tr>
 		<th>Stock Name</th>
 		<th>Quantity</th>
@@ -185,5 +279,7 @@ angular.module("mainModule", [])
 	</div>
 </div>
 
+<div id="chartdiv1"></div>
+<div id="chartdiv2"></div>
 </body>
 </html>
