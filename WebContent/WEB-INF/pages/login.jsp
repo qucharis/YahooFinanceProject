@@ -76,8 +76,9 @@ body,html {
 </script>
 <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script><!-- angularJS Ajax call: http call -->
-<script src="js/bootstrap.js">
-</script>
+<script src="js/bootstrap.js"></script>
+<script src="js/script.js"></script>
+
 <script>
 	$(document).ready(function() {
 		if ("<c:out value='${param.login_error}'/>" != "") {
@@ -85,15 +86,15 @@ body,html {
 		}
 		
  		<c:if test="${isUserExist}">
-	    	alert("This user already exist!");
+	    	//alert("This user already exist!");
+	    	$("#userExist").show();
 			$("#signup").trigger("click");
 		</c:if>
 		<c:if test="${registerResult}">
-			alert("Registration success");
+			alert("Registration success\nCheck your email to complete your registration");
 		</c:if>		
 		$("#signin").on("click", loginValidation);
 	});
-
 	function loginValidation() {
 		$("#usernameAndPasswordReq").hide();
 		$("#usernameReq").hide();
@@ -285,8 +286,8 @@ body,html {
                 <span class="col-md-4" ng-show="registerform.r_username.$dirty && registerform.r_username.$invalid">Required</span>
               </div>
            </div> 
-            
-            <div class="alert" style="display:none;" id="userExist">
+         
+            <div class="alert" style="display:none;" id="userExist" ng-hide="registerform.r_username.$dirty">
 	        <p>The user already exists</p>
             </div>
           
@@ -296,22 +297,23 @@ body,html {
               <div class="col-sm-6">
                 <input type="password" class="form-control" name="r_password" ng-model="user.r_password" id="r_password" placeholder="Password must between 6 to 20" required ng-minlength="6" ng-maxlength="20">
                 <span class="col-md-4" ng-show="registerform.r_password.$dirty && registerform.r_password.$error.required">Required</span>
-                <span class="col-md-4" ng-show="registerform.password.$dirty && (registerform.password.$error.minlength || registerform.password.$error.maxlength)">6 to 20 characters</span>
-
+                <span class="col-md-8" ng-show="(registerform.r_password.$dirty && registerform.r_password.$error.minlength) || (registerform.r_password.$dirty && registerform.r_password.$error.maxlength)">6-20 characters</span>
+				<span class="col-md-8" ng-show="(registerform.r_password.$dirty && registerform.r_password.$error.passwordVerify)">Password does not match</span>
               </div>
             </div>
 
 
           <div class="form-group">
-          <label class="control-label col-sm-2" for="pwd1">Confirm Password:</label>
-          <span class="glyphicon glyphicon-asterisk"></span>
-          <div class="col-sm-6">          
-          <input type="password" class="form-control" name="r_r_password" id="r_r_password" ng-model="user.r_r_password" password-verify="user.r_password" placeholder="Re-enter password must between 6 to 20" required ng-minlength="6" ng-maxlength="20">
-          </div>
-         <span class="col-md-4" ng-show="registerform.r_r_password.$dirty && registerform.r_r_password.$error.required">Required</span>
-         <span class="col-md-4" ng-show="registerform.r_r_password.$dirty && registerform.r_r_password.$error.passwordVerify">Password does not match</span>
-           <span class="col-md-4" ng-show="registerform.password.$dirty && (registerform.password.$error.minlength || registerform.password.$error.maxlength)">6 to 20 characters</span>
+          	<label class="control-label col-sm-2" for="pwd1">Confirm Password:</label>
+          	<span class="glyphicon glyphicon-asterisk"></span>
+          	<div class="col-sm-6">          
+          		<input type="password" class="form-control" name="r_r_password" id="r_r_password" ng-model="user.r_r_password" password-verify="user.r_password" placeholder="Re-enter password must between 6 to 20" required ng-minlength="6" ng-maxlength="20">
+         		<span class="col-md-4" ng-show="registerform.r_r_password.$dirty && registerform.r_r_password.$error.required">Required</span>
+         		<span class="col-md-6" ng-show="(registerform.r_r_password.$dirty && registerform.r_r_password.$error.minlength) || (registerform.r_r_password.$dirty && registerform.r_r_password.$error.maxlength)">6-20 characters</span>
+         		<span class="col-md-8" ng-show="(registerform.r_r_password.$dirty && registerform.r_r_password.$error.passwordVerify) || (registerform.r_password.$dirty && registerform.r_password.$error.passwordVerify)">Password not match</span>
+           		
           <!-- <button type="button" onclick="check()" value="Check">Check</button> -->
+        	</div>
         </div>
 
             <div class="form-group">
@@ -327,7 +329,11 @@ body,html {
 
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default" >Sign Up</button>
+                <button type="submit" class="btn btn-default" ng-disabled="registerform.r_password.$error.minlength 
+                		|| registerform.r_password.$error.maxlength || registerform.r_r_password.$error.minlength 
+                		|| registerform.r_r_password.$error.maxlength || registerform.r_password.$error.required
+                		|| registerform.r_r_password.$error.required || registerform.r_email.$error.required 
+                		|| registerform.r_email.$error.email || registerform.r_email.$error.pattern">Sign Up</button>
               </div>
             </div>
           </form>
