@@ -8,10 +8,8 @@ import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.Spring;
 import javax.ws.rs.FormParam;
 
-import org.codehaus.jackson.JsonFactory;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -54,62 +52,46 @@ public class CustomerController {
 	@Autowired
 	private UserService us;
 
-
-	
-	@RequestMapping(value="/main", method = RequestMethod.GET)
-	public ModelAndView mainPage() {
-		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("main");
-		mav.addObject("ownershipInfo", us.getOwnershipInfoByUserName(userName));
-		return mav;
-	}
-	
-	@RequestMapping(value="/transaction", method = RequestMethod.GET)
+	@RequestMapping(value = "/transaction", method = RequestMethod.GET)
 	public ModelAndView transactionPage() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("transaction");
-		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		String userName = SecurityContextHolder.getContext()
+				.getAuthentication().getName();
 		User user = us.getUser(userName);
-		List<RequestInfo> list= new ArrayList<RequestInfo>();
+		List<RequestInfo> list = new ArrayList<RequestInfo>();
 		Set<RequestInfo> set = new HashSet<RequestInfo>();
 		try {
-			set =cs.queryPending(user);
+			set = cs.queryPending(user);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
+
 		}
 		list = new ArrayList<RequestInfo>(set);
-		
-		
+
 		JSONArray ja = new JSONArray(list);
-		mav.addObject("Requests",ja.toString());
+		mav.addObject("Requests", ja.toString());
 		System.out.println(ja);
-		
+
 		return mav;
 	}
-	
-	@RequestMapping(value="/marketdata", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/marketdata", method = RequestMethod.GET)
 	public ModelAndView marketdataPage() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("marketdata");
 		return mav;
 	}
-	
-	@RequestMapping(value="/history", method = RequestMethod.GET)
-	public ModelAndView historyPage() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("history");
-		return mav;
-	}
+
 
 	@RequestMapping("/checkStock")
 	public ModelAndView checkStock(HttpServletRequest request) {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("piechart");
-		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		String userName = SecurityContextHolder.getContext()
+				.getAuthentication().getName();
 		User user = us.getUser(userName);
 		Set<Transaction> trans = user.getTransactions();
 		List<StockInfo> infos = new ArrayList<StockInfo>();
@@ -122,21 +104,34 @@ public class CustomerController {
 		mav.addObject("stockInfos", infos);
 		return mav;
 	}
-	
-	@RequestMapping(value="/buySub", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/addBal", method = RequestMethod.POST)
 	@ResponseBody
-	public String BuyingSubmmition(@FormParam("code") String code,@FormParam("amount") Integer amount) {
-		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+	public BigDecimal addBalance(@FormParam("amount") BigDecimal amount) {
+		String userName = SecurityContextHolder.getContext()
+				.getAuthentication().getName();
+		// System.out.println(amount);
+		// if()
+		us.addBalance(userName, amount);
+		return us.getBalance(userName);
+	}
+
+	@RequestMapping(value = "/buySub", method = RequestMethod.POST)
+	@ResponseBody
+	public String BuyingSubmmition(@FormParam("code") String code,
+			@FormParam("amount") Integer amount) {
+		String userName = SecurityContextHolder.getContext()
+				.getAuthentication().getName();
 		User user = us.getUser(userName);
 		code = code.toUpperCase();
 		double price = ss.getStockInfoBCode(code).getCurrentPrice();
-		if (ss.getStockInfoBCode(code)==null){
+		if (ss.getStockInfoBCode(code) == null) {
 			return "The Stock is NOT in the System";
-			
-		}else if(amount*price> user.getBalance().doubleValue()) {
+
+		} else if (amount * price > user.getBalance().doubleValue()) {
 			return "Your credit is NOT enough";
-			
-		}else{
+
+		} else {
 			StockInfo stockInfo = ss.getStockInfoBCode(code);
 			stockInfo.setCurrentPrice(price);
 			try {
@@ -147,48 +142,50 @@ public class CustomerController {
 				return "Unable to add Transactions";
 			}
 			double balance = user.getBalance().doubleValue();
-			user.setBalance(new BigDecimal(balance-price*amount));
+			user.setBalance(new BigDecimal(balance - price * amount));
 			us.updateUser(user);
 			return "Transaction Added";
 		}
-		
+
 	}
-	
-	@RequestMapping(value="/sellSub", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/sellSub", method = RequestMethod.POST)
 	@ResponseBody
-	public String sellingSubmmition(@FormParam("code") String code,@FormParam("amount") Integer amount) {
-		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+	public String sellingSubmmition(@FormParam("code") String code,
+			@FormParam("amount") Integer amount) {
+		String userName = SecurityContextHolder.getContext()
+				.getAuthentication().getName();
 		User user = us.getUser(userName);
 		code = code.toUpperCase();
-		Set<Ownership> set=us.getOwnershipInfoByUser(user).getOwnerships();
+		Set<Ownership> set = us.getOwnershipInfoByUser(user).getOwnerships();
 		Stock stock = null;
 		Ownership os = new Ownership();
-		for (Ownership o:set){
-			if (o.getStock().getScode().equals(code)){
+		for (Ownership o : set) {
+			if (o.getStock().getScode().equals(code)) {
 				stock = o.getStock();
 				os = o;
 				break;
 			}
 		}
-		if (stock==null){
+		if (stock == null) {
 			return "You don't have This Stock";
-		}else if(amount>os.getQuantity()) {
-			return "You don't have that much of "+stock.getScode();
-			
-		}else{
-			
+		} else if (amount > os.getQuantity()) {
+			return "You don't have that much of " + stock.getScode();
+
+		} else {
+
 			try {
 				StockInfo stockInfo = ss.getStockInfoBCode(code);
-				cs.requestExchange(stockInfo, user,-amount);
+				cs.requestExchange(stockInfo, user, -amount);
 				return "Transaction Added";
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return "Unable to add Transactions";
 			}
-			
+
 		}
-		
+
 	}
-	
+
 }

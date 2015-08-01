@@ -32,6 +32,8 @@ import org.springframework.web.servlet.ModelAndView;
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 
+import com.mercury.beans.Ownership;
+import com.mercury.beans.OwnershipInfo;
 import com.mercury.beans.Stock;
 import com.mercury.beans.StockInfo;
 import com.mercury.beans.User;
@@ -217,6 +219,24 @@ public class HelloController {
 	}
 
 
+	@RequestMapping(value="/main", method = RequestMethod.GET)
+	public ModelAndView mainPage() {
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		ModelAndView mav = new ModelAndView();
+		OwnershipInfo owninfo = us.getOwnershipInfoByUserName(userName);
+		Set<StockInfo> infos = new HashSet<StockInfo>();
+		for (Ownership own : owninfo.getOwnerships()) {
+			StockInfo si = ss.getInfo(own.getStock());
+			si.setAmount(own.getQuantity());
+			infos.add(si);
+		}
+		
+		mav.setViewName("main");
+		mav.addObject("ownershipInfo", owninfo);
+		mav.addObject("balance", us.getBalance(userName));
+		mav.addObject("stockInfos", infos);
+		return mav;
+	}
 	
 	@RequestMapping(value="/admin", method = RequestMethod.GET)
 	public ModelAndView adminPage() {
@@ -228,7 +248,24 @@ public class HelloController {
 	}
 	
 	
-	
+	@RequestMapping(value="/history", method = RequestMethod.GET)
+	public ModelAndView historyPage() {
+		System.out.println("history.........................");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("history");
+		return mav;
+	}
+	@RequestMapping(value="/activateAccount", method = RequestMethod.GET)
+	public ModelAndView activeMail(HttpServletRequest request) {
+		String username = request.getParameter("username");
+		User user = ud.getUserByUsername(username);
+		user.setEnable(1);
+		ud.updateUser(user);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("active_confirm");
+		return mav;
+	}
+
 //	@RequestMapping(value="/main", method = RequestMethod.GET)
 //	@ResponseBody
 //	public String mainPage() {
