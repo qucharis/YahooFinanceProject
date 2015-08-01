@@ -333,7 +333,7 @@ body,html {
                 		|| registerform.r_password.$error.maxlength || registerform.r_r_password.$error.minlength 
                 		|| registerform.r_r_password.$error.maxlength || registerform.r_password.$error.required
                 		|| registerform.r_r_password.$error.required || registerform.r_email.$error.required 
-                		|| registerform.r_email.$error.email">Sign Up</button>
+                		|| registerform.r_email.$error.email || registerform.r_email.$error.pattern">Sign Up</button>
               </div>
             </div>
           </form>
