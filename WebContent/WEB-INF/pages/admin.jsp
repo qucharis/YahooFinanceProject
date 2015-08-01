@@ -6,8 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Admin</title>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
-</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
+
 <script>
 	$(document).ready(function() {
 		$("#para1").hide();
@@ -68,6 +70,30 @@
 	});
 
 </script>
+
+<script type="text/javascript">
+var module = angular.module("mainModule", []);
+module.controller("mainController", function ($scope, $http) {
+	$scope.parseStatus="no transaction changed";
+	
+	$scope.parseTrans=function(resultVarName){
+		var msg;
+		$http({
+			method: "POST",
+   			url: "rest/parseCSV",
+   			data: msg,
+   			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		}).success(function (data, status, headers, config){
+			$scope[resultVarName] = data;
+			$scope.parseStatus = data;
+		}).error(function (data, status, headers, config){
+			$scope[resultVarName] = "SUBMIT ERROR";
+		});
+	}
+});
+
+
+</script>
 </head>
 <body>
 <h1><font color="green">${title}</font></h1>
@@ -95,6 +121,18 @@
 </table>
 
 <br/>
+
+<div ng-app="mainModule">
+	<div ng-controller="mainController">
+		<div>
+			<button ng-click="parseTrans('result')">Parse Requests</button>
+		</div>
+		<div><h1>{{parseStatus}}</h1></div>
+	</div>
+
+</div>
+
+
 <a href="<c:url value='/j_spring_security_logout'/>">Logout</a>
 </body>
 </html>

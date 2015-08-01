@@ -216,14 +216,7 @@ public class HelloController {
 		return opStr;
 	}
 
-	@RequestMapping(value="/main", method = RequestMethod.GET)
-	public ModelAndView mainPage() {
-		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("main");
-		mav.addObject("ownershipInfo", us.getOwnershipInfoByUserName(userName));
-		return mav;
-	}
+
 	
 	@RequestMapping(value="/admin", method = RequestMethod.GET)
 	public ModelAndView adminPage() {
@@ -234,26 +227,7 @@ public class HelloController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/transaction", method = RequestMethod.GET)
-	public ModelAndView transactionPage() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("transaction");
-		return mav;
-	}
 	
-	@RequestMapping(value="/marketdata", method = RequestMethod.GET)
-	public ModelAndView marketdataPage() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("marketdata");
-		return mav;
-	}
-	
-	@RequestMapping(value="/history", method = RequestMethod.GET)
-	public ModelAndView historyPage() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("history");
-		return mav;
-	}
 	
 //	@RequestMapping(value="/main", method = RequestMethod.GET)
 //	@ResponseBody
