@@ -12,7 +12,7 @@
 
 <style type="text/css">
 h3 {
-	color: #5CDEF2;
+	color: #27A0C4;
 	text-align:center;
 	font-family: 'Orbitron', sans-serif;
 	letter-spacing: 2px;
