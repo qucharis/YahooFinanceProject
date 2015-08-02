@@ -68,7 +68,10 @@ public class CustomerController {
 			e.printStackTrace();
 
 		}
-		list = new ArrayList<RequestInfo>(set);
+		if (set!=null){
+			list = new ArrayList<RequestInfo>(set);
+		}
+		
 
 		JSONArray ja = new JSONArray(list);
 		mav.addObject("Requests", ja.toString());
