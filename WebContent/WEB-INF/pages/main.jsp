@@ -39,11 +39,11 @@ h2 {
 #tbl {
 	float: right;
 	font-size: 120%;
-	width:24%;
-	margin-right: 2.1cm;
+	width:22%;
+	margin-right: 1.5cm;
 }
 #tbl th {
-	padding-right: 10px;
+	padding-right: 8px;
 }
 #towns {
 	margin-left:auto; 
@@ -61,11 +61,13 @@ h2 {
 	width:600px;
 	height:400px;
 	float: left;
+	margin-left: 4%;
 }
 #chartdiv2 {
 	width:600px;
 	height:400px;
-	float: right;
+	float: left;
+	margin-left: 4%;
 }
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -83,7 +85,7 @@ angular.module("mainModule", [])
   			amount: 0
   		};
   	    $scope.isAmountValid = function () {
-  	    	if($scope.request.amount>0)
+  	    	if($scope.request.amount>0 && $scope.request.amount<1000000)
   	      	return true;
   	    };
   		
@@ -104,6 +106,9 @@ angular.module("mainModule", [])
     			$scope[resultVarName] = data;
     			request.amount = 0;
     			$scope.currentbalance = data;
+    			if($scope.currentbalance > 99000000){
+        			$scope.isAmountValid = false;
+    			}
     			//$scope.welcomeMsg = data; 
       		}) .error(function (data, status, headers, config) {
         		$scope[resultVarName] = "SUBMIT ERROR";
@@ -206,17 +211,17 @@ var set2 = [];
 <table id="tbl" >
 	<tr>
 		<th><button id="addmoney" data-toggle="modal" data-target="#balModal" class="btn btn-primary btn-sm">Add Money</button></th>
-		<th>Your Balance: </th>
-		<th id="j_name" style="color:red">{{currentbalance}}</th>
+		<th>Your Balance: <span id="j_name" style="color:red">{{currentbalance}}</span></th>
 	</tr>
 </table>
 
-<h2><font>${ownershipInfo.message}</font></h2>
 
 <div style="display:none">
 	<p id="remoteBalance">${balance}</p> <!-- jsp expression -->
 </div>
 
+
+<h2><font>${ownershipInfo.message}</font></h2>
 
 <%-- <h3>Your Balance: ${balance} <span><button id="submit1">Add Money</button></span></h3> --%>
 <table id="towns" width="200" border="1" class="table table-striped table-bordered table-hover table-responsive">
