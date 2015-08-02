@@ -83,6 +83,10 @@ body,html {
 	$(document).ready(function() {
 		if ("<c:out value='${param.login_error}'/>" != "") {
 			$('#wrongCredentials').show();
+			//Auto fade out alert block
+			window.setTimeout(function() {
+				$('#wrongCredentials').fadeTo(1500, 0).slideUp(500);
+			}, 2000);
 		}
 		
  		<c:if test="${isUserExist}">
@@ -92,8 +96,10 @@ body,html {
 		</c:if>
 		<c:if test="${registerResult}">
 			alert("Registration success\nCheck your email to complete your registration");
-		</c:if>		
+		</c:if>	
+		
 		$("#signin").on("click", loginValidation);
+		
 	});
 	function loginValidation() {
 		$("#usernameAndPasswordReq").hide();
@@ -103,19 +109,30 @@ body,html {
 		if ($("#j_username").val().length == 0
 				&& $("#j_password").val().length == 0) {
 			$("#usernameAndPasswordReq").show();
+			//Auto fade out alert block
+			window.setTimeout(function() {
+				$('#usernameAndPasswordReq').fadeTo(1500, 0).slideUp(500);
+			}, 2000);
 			return false;
 		} else if ($("#j_username").val().length == 0) {
 			$('#usernameReq').show();
+	 		//Auto fade out alert block
+	 		window.setTimeout(function() {
+				$('#usernameReq').fadeTo(1500, 0).slideUp(500);
+			}, 2000);
 			return false;
 		} else if ($("#j_password").val().length == 0) {
 			$("#passwordReq").show();
+			//Auto fade out alert block
+			window.setTimeout(function() {
+				$('#passwordReq').fadeTo(1500, 0).slideUp(500);
+			}, 2000);
 			return false;
 		} else {
 			return true;
 		}
 	}
-	
-	
+
 </script>
 
 <script>
