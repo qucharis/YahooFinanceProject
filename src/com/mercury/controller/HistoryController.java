@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.annotation.Resource;
 import javax.ws.rs.FormParam;
@@ -44,7 +45,7 @@ public class HistoryController {
 		User user = userDao.getUserByUsername(userName);
 		System.out.println(user.getUserId()+":"+user.getUserName()+":"+user.getEmail());
 		Set<Transaction> transactions = user.getTransactions();
-		Set<TransactionInfo> result = new HashSet<TransactionInfo>();
+		TreeSet<TransactionInfo> result = new TreeSet<TransactionInfo>();
 		for(Transaction tran:transactions) {
 			System.out.println(tran.getUser().getUserName()+":"+tran.getStock().getScode()+":"+tran.getStock().getStockName()
 					+tran.getAmount()+":"+tran.getUnitprice()+":"+tran.getTimestamp());
@@ -56,6 +57,7 @@ public class HistoryController {
 			Timestamp tm = tran.getTimestamp();
 			result.add(new TransactionInfo(userid, tmpUser, stock, amount, unitprice, tm));
 		}
+		
 		
 		//Set<Transaction> transactions = transactionService.queryByUser(user);
 		/*Set<Transaction> transactions = new HashSet<Transaction>();
