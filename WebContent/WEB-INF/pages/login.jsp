@@ -203,7 +203,7 @@ body,html {
 						<p><strong>Warning!</strong> Password is required</p>
 					</div>
 					<div class="alert alert-warning" id="wrongCredentials" style="display: none;">
-						<p><strong>Warning!</strong> User is not exist</p>
+						<p><strong>Warning!</strong> The Username or Password you entered is incorrect.</p>
 					</div>
 				</div>
 				
