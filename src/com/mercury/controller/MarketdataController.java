@@ -2,6 +2,7 @@ package com.mercury.controller;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import au.com.bytecode.opencsv.CSVReader;
+import au.com.bytecode.opencsv.CSVWriter;
 
 import com.mercury.beans.Ownership;
 import com.mercury.beans.Stock;
@@ -106,7 +108,7 @@ public class MarketdataController {
 				e.printStackTrace();
 			}
 			if (list.size()!=0) {
-				User user = us.getUser(Integer.valueOf(list.get(1)[0]));
+				User user = us.getUser(Integer.valueOf(list.get(0)[0]));
 				
 				for (String[] s : list) {
 					
@@ -116,18 +118,28 @@ public class MarketdataController {
 					os.setUser(user);
 					if (user.addOrUpdateOwnership(os)){
 						user.setBalance(new BigDecimal((user.getBalance().doubleValue()-Integer.valueOf(s[2])*Double.valueOf(s[3]))));
+						
+						ts.addTransaction(
+								user,
+								ss.getStockInfoById(Integer.valueOf(s[1])),
+								Integer.valueOf(s[2]),
+								Double.valueOf(s[3]),
+								(new Timestamp(Date.parse(s[4])))
+								);
 					}
 					
 					us.updateUser(user);
 					
-					ts.addTransaction(
-							user,
-							ss.getStockInfoById(Integer.valueOf(s[1])),
-							Integer.valueOf(s[2]),
-							Double.valueOf(s[3]),
-							(new Timestamp(Date.parse(s[4])))
-							);
+				
 				}
+			}
+			try {
+				CSVWriter cw = new CSVWriter(new FileWriter(f));
+				cw.flush();
+				cw.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		
