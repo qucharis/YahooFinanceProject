@@ -218,6 +218,7 @@ public class HelloController {
 		return opStr;
 	}
 
+
 	@RequestMapping(value="/main", method = RequestMethod.GET)
 	public ModelAndView mainPage() {
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -246,19 +247,6 @@ public class HelloController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/transaction", method = RequestMethod.GET)
-	public ModelAndView transactionPage() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("transaction");
-		return mav;
-	}
-	
-	@RequestMapping(value="/marketdata", method = RequestMethod.GET)
-	public ModelAndView marketdataPage() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("marketdata");
-		return mav;
-	}
 	
 	@RequestMapping(value="/history", method = RequestMethod.GET)
 	public ModelAndView historyPage() {
@@ -277,6 +265,7 @@ public class HelloController {
 		mav.setViewName("active_confirm");
 		return mav;
 	}
+
 //	@RequestMapping(value="/main", method = RequestMethod.GET)
 //	@ResponseBody
 //	public String mainPage() {

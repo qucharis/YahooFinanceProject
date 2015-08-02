@@ -3,12 +3,17 @@ package com.mercury.services;
 import java.math.BigDecimal;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.mercury.beans.OwnershipInfo;
 import com.mercury.beans.User;
 import com.mercury.daos.UserDao;
 
 public class UserService {
+	@Autowired
 	private UserDao ud;
+
+
 	public UserDao getUd() {
 		return ud;
 	}
@@ -58,10 +63,15 @@ public class UserService {
 	public User getUser(int id){
 		return ud.getUserById(id);
 	}
-	public User getUser(String userName){
-		return ud.getUserByUsername(userName);
+	
+	public User getUser(String name){
+		return ud.getUserByUsername(name);
 	}
 	
+	public void updateUser(User user){
+		ud.updateUser(user);
+	}
+
 	public User getUserByEmail(String email){
 		Set<User> set = ud.queryAll();
 		for(User u:set){
