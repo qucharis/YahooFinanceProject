@@ -39,8 +39,11 @@ h2 {
 #tbl {
 	float: right;
 	font-size: 120%;
-	width:21%;
+	width:24%;
 	margin-right: 2.1cm;
+}
+#tbl th {
+	padding-right: 10px;
 }
 #towns {
 	margin-left:auto; 
@@ -200,10 +203,11 @@ var set2 = [];
 	</div>
 </div>
 
-<table id="tbl">
+<table id="tbl" >
 	<tr>
 		<th><button id="addmoney" data-toggle="modal" data-target="#balModal" class="btn btn-primary btn-sm">Add Money</button></th>
-		<th>Your Balance: <span id="j_name" style="color:red">{{currentbalance}}</span></th>
+		<th>Your Balance: </th>
+		<th id="j_name" style="color:red">{{currentbalance}}</th>
 	</tr>
 </table>
 
