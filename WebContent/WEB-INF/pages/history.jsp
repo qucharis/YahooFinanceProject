@@ -9,14 +9,15 @@
 <link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Unkempt:400,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Cinzel' rel='stylesheet' type='text/css'>
 <link href="css/bootstrap.css" rel="stylesheet">
 
 <style type="text/css">
 h3 {
-	color: #27A0C4;
+	color: #F6FF52;
 	text-align:center;
-	font-family: 'Unkempt', cursive;
-	font-weight: 700;
+	font-family: 'Cinzel', serif;
+	font-weight: 900;
 	letter-spacing: 1px;
 }
 
@@ -39,8 +40,17 @@ h3 {
 table {
 	margin-left:auto; 
     margin-right:auto;
-} 
+}
 
+html {
+	min-height: 100%;
+}
+
+body {
+	background-image: url(images/city3.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
 
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -101,7 +111,7 @@ table {
 		<h3>Hello {{historyArray[0].user.userName}}, this is your transaction history</h3>
 		<div class="table-responsive"> 
 			<table id="stockList" border="1" style="width: 800px" class="table table-striped table-bordered table-hover table-responsive">
-				<tr>
+				<tr class="danger">
 					<th>Index</th>
 					<th>Stock Code</th>
 					<th>Stock Name</th>
@@ -110,7 +120,7 @@ table {
 					<th>Transaction Time</th>
 					
 				</tr>
-				<tr ng-repeat="history in historyArray">
+				<tr ng-repeat="history in historyArray" class="success">
 					<td ng-if="$odd" >{{ $index + 1 }}</td>
 					<td ng-if="$even">{{ $index + 1 }}</td>
 					<td ng-if="$odd" >{{history.stock.scode | uppercase}}</td>
