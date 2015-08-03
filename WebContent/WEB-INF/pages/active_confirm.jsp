@@ -4,15 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Confirmation page</title>
 <style type="text/css">
-p, a {
+#time, p, a {
 	text-align:center;
-	font-family: 'Orbitron', sans-serif;
-	letter-spacing: 2px;
 	font-family: 'Unkempt', cursive;
+	letter-spacing: 2px;
 	font-weight: 700;
 }
+
 </style>
 </head>
 <body>
@@ -32,7 +32,8 @@ p, a {
 	}
 </script>
 	<span id="time" style="background: red">3</span>
-	<a href="http://localhost:8080/YahooFinanceProject/main.html">Go to Yahoo Finance page after 3 seconds, if not click the below link</a>
+	<br>
+	<a href="http://localhost:8080/YahooFinanceProject/main.html">This page will goto Yahoo Finance page after 3 seconds, if not click this link</a>
 <script type="text/javascript">
 	delayURL("http://localhost:8080/YahooFinanceProject/main.html");
 </script>&nbsp;
