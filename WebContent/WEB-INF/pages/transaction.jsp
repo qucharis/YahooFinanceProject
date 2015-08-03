@@ -12,10 +12,10 @@
 
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.js"></script>
-<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
+<script src= "js/angular.min.js"></script>
+<script src="js/angular-resource.min.js"></script>
 <!-- angularJS Ajax call: http call -->
 <title>Transaction Service Test</title>
 <style type="text/css"> 
@@ -53,7 +53,7 @@ module.controller("bsController", function ($scope, $http) {
 		       	amount: request.amount
 		    };
 	  		var msg="";
-	    	request.code = "goog";
+	    	request.code = "";
 	   		$http({
 	   			method: "POST",
 	   			url: "rest/buySub",
