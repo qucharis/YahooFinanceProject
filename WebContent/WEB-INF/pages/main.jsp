@@ -10,6 +10,7 @@
 <link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Unkempt:400,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Cinzel' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-theme.min.css" rel="stylesheet">
@@ -31,10 +32,11 @@
 	font-weight: 700;
 }
 h2 {
-	color: #27A0C4;
-	margin-left: 3cm;
-	font-family: 'Unkempt', cursive;
+	color: #F6FF52;
+	text-align:center;
+	font-family: 'Cinzel', serif;
 	font-weight: 700;
+	letter-spacing: 1px;
 }
 #tbl {
 	float: right;
@@ -61,14 +63,24 @@ h2 {
 	width:600px;
 	height:400px;
 	float: left;
-	margin-left: 4%;
+	margin-left: 3%;
 }
 #chartdiv2 {
 	width:600px;
 	height:400px;
 	float: left;
-	margin-left: 4%;
+	margin-left: 3%;
 }
+html {
+	min-height: 100%;
+}
+
+body {
+	background-image: url(images/back.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
@@ -225,12 +237,12 @@ var set2 = [];
 
 <%-- <h3>Your Balance: ${balance} <span><button id="submit1">Add Money</button></span></h3> --%>
 <table id="towns" width="200" border="1" class="table table-striped table-bordered table-hover table-responsive">
-	<tr>
+	<tr class="danger">
 		<th>Stock Name</th>
 		<th>Quantity</th>
 	</tr>
 	<c:forEach var="ownership" items="${ownershipInfo.ownerships}">
-		<tr>
+		<tr class="success">
 			<td>${ownership.stock.stockName}</td>
 			<td>${ownership.quantity}</td>
 		</tr>

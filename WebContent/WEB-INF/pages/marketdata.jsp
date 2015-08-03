@@ -8,16 +8,16 @@
 <title>Market data</title>
 <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Unkempt:400,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Cinzel' rel='stylesheet' type='text/css'>
 <link href="css/bootstrap.css" rel="stylesheet">
 
 <style type="text/css">
 h3 {
-	color: #27A0C4;
+	color: #F6FF52;
 	text-align:center;
-	font-family: 'Orbitron', sans-serif;
-	letter-spacing: 2px;
-	font-family: 'Unkempt', cursive;
+	font-family: 'Cinzel', serif;
 	font-weight: 700;
+	letter-spacing: 1px;
 }
 
 .yahoo {
@@ -41,6 +41,15 @@ table {
     margin-right:auto;
 } 
 
+html {
+	min-height: 100%;
+}
+
+body {
+	background-image: url(images/city2.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
@@ -49,7 +58,7 @@ table {
 <script>
 	angular.module("mainModule", []).controller("mainController", function($scope, $interval, $http) {
 		// Initialization
-		$scope.stocksArray = [];
+		$scope.stocksArray = $.parseJSON('${Requests}');
 		$interval(function() {
 			$http({
 				method: "GET",
@@ -93,14 +102,14 @@ table {
 	<h3>Real Time Market Data</h3>
 	<div class="table-responsive"> 
 		<table id="stockList" border="1" style="width: 500px" class="table table-striped table-bordered table-hover table-responsive">
-			<tr>
+			<tr class="danger">
 				<th>Stock Code</th>
 				<th>Stock Name</th>
 				<th>Current Price</th>
 				<th>Price Change</th>
 			</tr>
 	
-			<tr ng-repeat="stock in stocksArray">
+			<tr ng-repeat="stock in stocksArray" class="success">
 				<td>{{stock.scode}}</td>
 				<td>{{stock.stockName}}</td>
 				<td>{{stock.currentPrice}}</td>

@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -43,7 +45,7 @@ public class MarketdataController {
 	@Autowired
 	private TransactionService ts;
 
-	private Set<StockInfo> stocks;	//collection autowire cannot work, need to use resource
+	private List<StockInfo> stocks;	//collection autowire cannot work, need to use resource
 	
 	public StockService getSs() {
 		return ss;
@@ -55,8 +57,17 @@ public class MarketdataController {
 
 	@RequestMapping(value="/market", method=RequestMethod.GET)
 	@ResponseBody
-	public Set<StockInfo> marketData() {
-		stocks = ss.getInfo(ss.getAllStocks());
+	public List<StockInfo> marketData() {
+		stocks = new ArrayList<StockInfo>(ss.getInfo(ss.getAllStocks()));
+		Collections.sort(stocks, new Comparator<StockInfo>(){
+
+			@Override
+			public int compare(StockInfo first, StockInfo second) {
+				// TODO Auto-generated method stub
+				return first.getScode().compareTo(second.getScode());
+			}
+			
+		});
 /*		for(StockInfo stock:stocks) {
 			System.out.println(stock.getScode() + " " + stock.getCurrentPrice());
 		}*/
