@@ -88,7 +88,7 @@ public class CustomerController {
 	}
 
 
-	@RequestMapping("/checkStock")
+	@RequestMapping("/checkStock")//for test
 	public ModelAndView checkStock(HttpServletRequest request) {
 
 		ModelAndView mav = new ModelAndView();

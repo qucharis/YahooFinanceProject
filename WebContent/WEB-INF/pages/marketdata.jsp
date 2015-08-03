@@ -14,10 +14,9 @@
 h3 {
 	color: #27A0C4;
 	text-align:center;
-	font-family: 'Orbitron', sans-serif;
-	letter-spacing: 2px;
 	font-family: 'Unkempt', cursive;
 	font-weight: 700;
+	letter-spacing: 1px;
 }
 
 .yahoo {
