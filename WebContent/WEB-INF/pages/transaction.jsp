@@ -8,6 +8,8 @@
 <title>Yahoo Finance System</title>
 <link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Unkempt:400,700' rel='stylesheet' type='text/css'>
+
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -17,8 +19,22 @@
 <!-- angularJS Ajax call: http call -->
 <title>Transaction Service Test</title>
 <style type="text/css"> 
-</style>
+.yahoo {
+	color: green;
+	font-size: 36px;
+	letter-spacing: 3px;
+	font-family: 'Orbitron', sans-serif;
+	font-weight: 700;
+}
 
+.finance {
+	color: #D00000;
+	font-size: 36px;
+	letter-spacing: 3px;
+	font-family: 'Orbitron', sans-serif;
+	font-weight: 700;
+}
+</style>
 <script>
 var module = angular.module("mainModule", []);
 module.controller("bsController", function ($scope, $http) {

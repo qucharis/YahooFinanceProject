@@ -25,8 +25,10 @@ public class UserService {
 	public void addBalance(String userName, BigDecimal addMoney) {
 		User user =ud.getUserByUsername(userName);
 		double newBalance =user.getBalance().doubleValue() + addMoney.doubleValue();
-		user.setBalance(new BigDecimal(newBalance));
-		ud.updateUser(user);
+		if(newBalance<99999999) {
+			user.setBalance(new BigDecimal(newBalance));
+			ud.updateUser(user);
+		}
 	}
 	
 	public BigDecimal getBalance(String userName) {

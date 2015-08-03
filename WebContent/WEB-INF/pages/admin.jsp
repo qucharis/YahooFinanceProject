@@ -6,6 +6,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Admin</title>
+<style>
+h4 {
+	margin-bottom: 0cm;
+	margin-left: 0.1cm;
+}
+</style>
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
@@ -98,11 +105,8 @@ module.controller("mainController", function ($scope, $http) {
 <body>
 <h1><font color="green">${title}</font></h1>
 
+<h4>Stock Add or Remove: <span id = "para1" style="color:red">No message</span></h4>
 <table>
-	<tr>
-		<th>Stock(+/-)</th>
-		<th id = "para1" style="color:red">No message</th>
-	</tr>
 	<tr>
 		<td>Stock Code: </td>
 		<td><input type="text" name="scode" id="scode1"/></td>
@@ -120,6 +124,7 @@ module.controller("mainController", function ($scope, $http) {
 	</tr>
 </table>
 
+<br/>
 <br/>
 
 <div ng-app="mainModule">
