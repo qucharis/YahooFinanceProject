@@ -48,7 +48,7 @@ table {
 <script>
 	angular.module("mainModule", []).controller("mainController", function($scope, $interval, $http) {
 		// Initialization
-		$scope.stocksArray = [];
+		$scope.stocksArray = $.parseJSON('${Requests}');
 		$interval(function() {
 			$http({
 				method: "GET",
