@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="trade_history")
-public class Transaction {
+public class Transaction implements Comparable<Transaction> {
 	private int transid;
 	private User user;
 	private Stock stock;
@@ -111,5 +111,10 @@ public class Transaction {
 	}
 	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
+	}
+	
+	@Override
+	public int compareTo(Transaction another) {
+		return another.timestamp.compareTo(timestamp);
 	}
 }
