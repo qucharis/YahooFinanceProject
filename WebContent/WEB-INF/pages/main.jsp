@@ -416,11 +416,11 @@ body {
 			<th>Quantity</th>
 			<th>Current Price</th>
 		</tr>
-		<tr ng-repeat="stockInfo in stockInfos" class = "success">
-			<td>{{stockInfo.stock}}</td>
-			<td>{{stockInfo.scode}}</td>
-			<td>{{stockInfo.amount}}</td>
-			<td>{{stockInfo.price}}</td>
+		<tr  ng-repeat="stockInfo in stockInfos" class = "success">
+			<td ng-if="stockInfo.amount !=0">{{stockInfo.stock}}</td>
+			<td ng-if="stockInfo.amount !=0">{{stockInfo.scode}}</td>
+			<td ng-if="stockInfo.amount !=0">{{stockInfo.amount}}</td>
+			<td ng-if="stockInfo.amount !=0">{{stockInfo.price}}</td>
 		</tr>
 	</table>
 
