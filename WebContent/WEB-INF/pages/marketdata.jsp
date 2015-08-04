@@ -72,7 +72,7 @@ var module = angular.module("mainModule", []);
 			}).success(function(data) {
 				$scope.stocksArray = data;
 			}).error(function(data) {
-				alert("AJAX Error!");
+				//alert("AJAX Error!");
 			});
 		}, 2000);
 	});	
