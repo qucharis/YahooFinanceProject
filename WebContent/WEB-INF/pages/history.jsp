@@ -99,7 +99,7 @@ body {
 			<ul id= "menu" class= "nav navbar-nav navbar-right">
 				<li><a href = "/YahooFinanceProject/main.html">Portfolio</a></li>
 				<li><a href = "/YahooFinanceProject/transaction.html">Transaction</a></li>
-				<li><a href = "/YahooFinanceProject/marketdata.html">Market data</a></li>
+				<li><a href = "/YahooFinanceProject/marketdata.html">Market Data</a></li>
 				<li class= "active"><a href = "/YahooFinanceProject/history.html">History</a></li>
 				<li><a href="<c:url value='/j_spring_security_logout'/>">Logout</a></li>
 			</ul>
