@@ -3,6 +3,8 @@ package com.mercury.controller;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -74,7 +76,7 @@ public class CustomerController {
 		
 
 		JSONArray ja = new JSONArray(list);
-		mav.addObject("Requests", ja.toString());
+		mav.addObject("Requests", ja);
 		System.out.println(ja);
 
 		return mav;
@@ -84,11 +86,36 @@ public class CustomerController {
 	public ModelAndView marketdataPage() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("marketdata");
+		List<StockInfo> list = new ArrayList<StockInfo>();
+		Set<StockInfo> set = new HashSet<StockInfo>();
+		try {
+			set = ss.getInfo(ss.getAllStocks());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		}
+		if (set!=null){
+			list = new ArrayList<StockInfo>(set);
+			Collections.sort(list, new Comparator<StockInfo>(){
+
+				@Override
+				public int compare(StockInfo first, StockInfo second) {
+					// TODO Auto-generated method stub
+					return first.getScode().compareTo(second.getScode());
+				}
+				
+			});
+		}
+		
+		JSONArray ja = new JSONArray(list);
+		mav.addObject("Requests", ja);
+		System.out.println(ja);
 		return mav;
 	}
 
 
-	@RequestMapping("/checkStock")
+	@RequestMapping("/checkStock")//for test
 	public ModelAndView checkStock(HttpServletRequest request) {
 
 		ModelAndView mav = new ModelAndView();

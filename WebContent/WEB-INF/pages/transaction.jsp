@@ -9,6 +9,7 @@
 <link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Unkempt:400,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Cinzel' rel='stylesheet' type='text/css'>
 
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-theme.min.css" rel="stylesheet">
@@ -34,11 +35,26 @@
 	font-family: 'Orbitron', sans-serif;
 	font-weight: 700;
 }
+h3 {
+	color: #27A0C4;
+	text-align:center;
+	font-family: 'Cinzel', serif;
+	font-weight: 700;
+	letter-spacing: 1px;
+}
 table {
 	margin-left:auto; 
     margin-right:auto;
 } 
+html {
+	min-height: 100%;
+}
 
+body {
+	background-image: url(images/city.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
 </style>
 <script>
 var module = angular.module("mainModule", []);
@@ -84,8 +100,9 @@ module.controller("ShowTransactionController",function($scope,$http){
 <div ng-controller="ShowTransactionController">
 	<h3 style="text-align:center">Transaction Submitted</h3>
 	<div class="table-responsive"> 
-		<table id="stockList" border="1" style="width: 500px" class="table table-striped table-bordered table-hover table-responsive">
-			<tr>
+		<table id="stockList" border="1" style="width: 800px" class="table table-striped table-bordered table-hover table-responsive">
+			<tr class="danger">
+				<th>Index</th>
 				<th>Stock Name</th>
 				<th>Stock Code</th>
 				<th>Requested Price</th>
@@ -93,7 +110,8 @@ module.controller("ShowTransactionController",function($scope,$http){
 				<th>Requested Time</th>
 			</tr>
 	
-			<tr ng-repeat="request in requests">
+			<tr ng-repeat="request in requests" class="success">
+				<td>{{ $index + 1 }}</td>
 				<td>{{request.stockName}}</td>
 				<td>{{request.stockCode}}</td>
 				<td>{{request.unitprice|number : 2}}</td>

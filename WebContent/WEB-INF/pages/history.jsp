@@ -8,16 +8,17 @@
 <title>History</title>
 <link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Unkempt:400,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Cinzel' rel='stylesheet' type='text/css'>
 <link href="css/bootstrap.css" rel="stylesheet">
 
 <style type="text/css">
 h3 {
-	color: #5CDEF2;
+	color: #F6FF52;
 	text-align:center;
-	font-family: 'Orbitron', sans-serif;
-	letter-spacing: 2px;
-	font-family: 'Unkempt', cursive;
-	font-weight: 700;
+	font-family: 'Cinzel', serif;
+	font-weight: 900;
+	letter-spacing: 1px;
 }
 
 .yahoo {
@@ -36,17 +37,19 @@ h3 {
 	font-weight: 700;
 }
 
-table, th , td  {
-  border: 1px solid grey;
-  border-collapse: collapse;
-  margin-left:auto; 
-  margin-right:auto;
-  padding: 15px;
+table {
+	margin-left:auto; 
+    margin-right:auto;
 }
 
-th	{
-    background-color: black;
-    color: white;
+html {
+	min-height: 100%;
+}
+
+body {
+	background-image: url(images/city3.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 </style>
@@ -107,28 +110,28 @@ th	{
 	<div ng-controller="mainController">
 		<h3>Hello {{historyArray[0].user.userName}}, this is your transaction history</h3>
 		<div class="table-responsive"> 
-			<table id="stockList" border="1" style="width: 500px class="table table-striped table-bordered table-hover table-responsive"">
-				<tr>
-					<th></th>
-					<th>stock code</th>
-					<th>stock name</th>
-					<th>amount</th>
-					<th>unit price</th>
-					<th>transaction time</th>
+			<table id="stockList" border="1" style="width: 800px" class="table table-striped table-bordered table-hover table-responsive">
+				<tr class="danger">
+					<th>Index</th>
+					<th>Stock Code</th>
+					<th>Stock Name</th>
+					<th>Amount</th>
+					<th>Unit Price</th>
+					<th>Transaction Time</th>
 					
 				</tr>
-				<tr ng-repeat="history in historyArray">
-					<td ng-if="$odd" style="background-color:#f1f1f1">{{ $index + 1 }}</td>
+				<tr ng-repeat="history in historyArray" class="success">
+					<td ng-if="$odd" >{{ $index + 1 }}</td>
 					<td ng-if="$even">{{ $index + 1 }}</td>
-					<td ng-if="$odd" style="background-color:#f1f1f1">{{history.stock.scode | uppercase}}</td>
+					<td ng-if="$odd" >{{history.stock.scode | uppercase}}</td>
 					<td ng-if="$even">{{history.stock.scode | uppercase}}</td>
-					<td ng-if="$odd" style="background-color:#f1f1f1">{{history.stock.stockName}}</td>
+					<td ng-if="$odd" >{{history.stock.stockName}}</td>
 					<td ng-if="$even">{{history.stock.stockName}}</td>
-					<td ng-if="$odd" style="background-color:#f1f1f1">{{history.amount}}</td>
+					<td ng-if="$odd" >{{history.amount}}</td>
 					<td ng-if="$even">{{history.amount}}</td>
-					<td ng-if="$odd" style="background-color:#f1f1f1">{{history.unitprice}}</td>
+					<td ng-if="$odd" >{{history.unitprice}}</td>
 					<td ng-if="$even">{{history.unitprice}}</td>
-					<td ng-if="$odd" style="background-color:#f1f1f1">{{history.time}}</td>
+					<td ng-if="$odd" >{{history.time}}</td>
 					<td ng-if="$even">{{history.time}}</td>
 					<%-- <td>
 						<b ng-if="stock.change>0" style="color:green">{{stock.change}}</b>
