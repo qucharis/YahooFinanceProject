@@ -52,6 +52,18 @@ body {
 	background-size: cover;
 }
 
+.bar {
+ 	/* margin-left:auto; */
+ 	text-align:center; 
+ 	font-size: 20px;
+ 	color: #F6FF52;
+}
+
+.glyphicon {
+	font-size: 25px;
+	position: relative;
+	top: 10px;
+}
 </style>
 <script src="js/1.10.2/jquery.min.js"></script>
 <script src= "js/angular.min.js"></script>
@@ -59,9 +71,11 @@ body {
 <script src="js/bootstrap.js"></script>
 
 <script>
-	angular.module("mainModule", []).controller("mainController", function($scope, $interval, $http) {
+	var app = angular.module("mainModule", []);
+	app.controller("mainController", function($scope, $interval, $http) {
 		// Initialization
 		$scope.historyArray = [];
+		$scope.search = [];
 		//$interval(function() {
 			$http({
 				method: "POST",
@@ -75,7 +89,7 @@ body {
 				alert("AJAX Error!");
 			});
 		//}, 2000);
-	});	
+	});
 </script>
 
 </head>
@@ -109,6 +123,17 @@ body {
 
 	<div ng-controller="mainController">
 		<h3>Hello {{historyArray[0].user.userName}}, this is your transaction history</h3>
+		<div class="bar">
+			<br>
+		<!-- Create a binding between the searchString model and the text field -->
+			
+			<p>
+				<input class="search" type="text" ng-model="searchString" placeholder="Enter your search criteria" />
+				<span class="glyphicon glyphicon-search"></span>
+			</p>
+			<br>
+			<br>
+	</div>
 		<div class="table-responsive"> 
 			<table id="stockList" border="1" style="width: 800px" class="table table-striped table-bordered table-hover table-responsive">
 				<tr class="danger">
@@ -120,7 +145,8 @@ body {
 					<th>Transaction Time</th>
 					
 				</tr>
-				<tr ng-repeat="history in historyArray" class="success">
+				<tr ng-repeat="history in historyArray | filter:searchString" class="success">
+					
 					<td ng-if="$odd" >{{ $index + 1 }}</td>
 					<td ng-if="$even">{{ $index + 1 }}</td>
 					<td ng-if="$odd" >{{history.stock.scode | uppercase}}</td>
