@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+
 //import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -120,19 +121,20 @@ public class User {
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-	@Cascade(CascadeType.SAVE_UPDATE)
+	@Cascade(CascadeType.ALL)
 	public Set<Ownership> getOwnerships() {
 		return ownerships;
 	}
-
 	public void setOwnerships(Set<Ownership> ownerships) {
 		this.ownerships = ownerships;
 	}
-
+	public void removeOwnership(Ownership ownership) {
+		ownerships.remove(ownership);
+	}
 	public boolean addOrUpdateOwnership(Ownership neu) {
 		Ownership old = null;
 		for (Ownership o : ownerships) {
-			if (o.getStock().getSid() == neu.getStock().getSid()) {
+			if (o.getStock().getSid()== neu.getStock().getSid()) {
 				old = o;
 			}
 		}
@@ -145,7 +147,7 @@ public class User {
 			
 		} else {
 			int amount = old.getQuantity() + neu.getQuantity();
-			if (amount > 0) {
+			if (amount >= 0) {
 				old.setQuantity(amount);
 				return true;
 			}
@@ -154,12 +156,8 @@ public class User {
 		
 	}
 
-	public void removeOwnership(Ownership ownership) {
-		ownerships.remove(ownership);
-	}
-
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-	@Cascade(CascadeType.SAVE_UPDATE)
+	@Cascade({CascadeType.SAVE_UPDATE,CascadeType.DELETE})
 	public Set<Transaction> getTransactions() {
 		return transactions;
 	}
