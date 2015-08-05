@@ -64,6 +64,9 @@ body {
 	position: relative;
 	top: 10px;
 }
+.search {
+	color: black;
+}
 </style>
 <script src="js/1.10.2/jquery.min.js"></script>
 <script src= "js/angular.min.js"></script>
@@ -80,8 +83,8 @@ body {
 			$http({
 				method: "POST",
 				url: "rest/historyrecord",
-				params: {name: "guodong"},
-				data: "hello",
+				//params: {name: ""},
+				//data: "hello",
 				headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 			}).success(function(data) {
 				$scope.historyArray = data;
