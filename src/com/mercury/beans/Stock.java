@@ -51,7 +51,7 @@ public class Stock {
 		this.stockName = stockName;
 	}
 	
-	@OneToMany(mappedBy="stock")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="stock")
 	public Set<Ownership> getOwnerships() {
 		return ownerships;
 	}

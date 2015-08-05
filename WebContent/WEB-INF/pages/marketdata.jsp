@@ -195,14 +195,12 @@ body {
 					</td>
 				</tr>
 			</table>
-		</div>
+			</div>
 	</div>
-	<div class="center">
 
-		<button id="buy" data-toggle="modal" data-target="#myModal1"
-			type="submit" class="btn btn-primary btn-lg">Buy</button>
-		<button id="sell" display="inline" data-toggle="modal"
-			data-target="#myModal2" type="submit" class="btn btn-primary btn-lg">Sell</button>
+	<div class = "center">
+		<button id="buy" data-toggle="modal" data-target="#myModal1" type="submit" class="btn btn-warning btn-lg">Buy</button>
+		<button id="sell" display = "inline" data-toggle="modal" data-target="#myModal2" type="submit" class="btn btn-warning btn-lg">Sell</button>
 	</div>
 	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
