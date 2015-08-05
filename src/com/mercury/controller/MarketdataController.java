@@ -74,6 +74,31 @@ public class MarketdataController {
 		return stocks;
 	}
 	
+	
+	
+	@RequestMapping(value="/getStocks", method=RequestMethod.GET)
+	@ResponseBody
+	public List<Stock> getStocks() {
+		List<Stock> stocks= new ArrayList<Stock>();
+		Set<Stock> stocks1=ss.getAllStocks();
+		for(Stock stock: stocks1) {
+			stocks.add(new Stock(stock.getScode(),stock.getStockName()));
+//			System.out.println(stock);
+		}
+		Collections.sort(stocks, new Comparator<Stock>(){
+
+			@Override
+			public int compare(Stock first, Stock second) {
+				// TODO Auto-generated method stub
+				return first.getScode().compareTo(second.getScode());
+			}
+			
+		});
+		return stocks;
+	}
+	
+	
+	
 	@RequestMapping(value="/addstock", method=RequestMethod.POST)
 	@ResponseBody	//return a message instead of of view
 	public String addstock(@ModelAttribute("stock") 
