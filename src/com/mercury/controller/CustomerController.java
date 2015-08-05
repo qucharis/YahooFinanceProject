@@ -3,6 +3,7 @@ package com.mercury.controller;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -73,7 +74,15 @@ public class CustomerController {
 		if (set!=null){
 			list = new ArrayList<RequestInfo>(set);
 		}
-		
+		Collections.sort(list,new Comparator<RequestInfo>() {
+
+			@Override
+			public int compare(RequestInfo o1, RequestInfo o2) {
+				// TODO Auto-generated method stub
+				return -o1.getTs().toString().compareTo(o2.getTs().toString());
+			}
+			
+		});
 
 		JSONArray ja = new JSONArray(list);
 		mav.addObject("Requests", ja);

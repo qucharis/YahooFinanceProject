@@ -483,7 +483,7 @@ body {
 							<label for="amount" class="col-sm-2 control-label">Amount:</label>
 							<span class="glyphicon glyphicon-asterisk"></span>
 							<div class="col-sm-6">
-								<input type="number" class="form-control"
+								<input type="number" class="form-control" min="0"
 									ng-model="request.amount" id="amount2" placeholder="Amount"
 									name="amount" required>
 							</div>
@@ -544,7 +544,7 @@ body {
 							<label for="amount" class="col-sm-2 control-label">Amount:</label>
 							<span class="glyphicon glyphicon-asterisk"></span>
 							<div class="col-sm-6">
-								<input type="number" class="form-control"
+								<input type="number" class="form-control" min="0"
 									ng-model="request.amount" id="amount" placeholder="Amount"
 									name="amount" required>
 							</div>
