@@ -263,21 +263,21 @@ function removeCustomAlert() {
 		$("#wrongCredentials").hide();
 		if ($("#j_username").val().length == 0
 				&& $("#j_password").val().length == 0) {
-			$("#usernameAndPasswordReq").show();
+			$("#usernameAndPasswordReq").show().fadeTo(0, 1);
 			//Auto fade out alert block
 			window.setTimeout(function() {
 				$('#usernameAndPasswordReq').fadeTo(1500, 0).slideUp(500);
 			}, 2000);
 			return false;
 		} else if ($("#j_username").val().length == 0) {
-			$('#usernameReq').show();
+			$('#usernameReq').show().fadeTo(0, 1);
 	 		//Auto fade out alert block
 	 		window.setTimeout(function() {
 				$('#usernameReq').fadeTo(1500, 0).slideUp(500);
 			}, 2000);
 			return false;
 		} else if ($("#j_password").val().length == 0) {
-			$("#passwordReq").show();
+			$("#passwordReq").show().fadeTo(0, 1);
 			//Auto fade out alert block
 			window.setTimeout(function() {
 				$('#passwordReq').fadeTo(1500, 0).slideUp(500);
