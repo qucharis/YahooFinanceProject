@@ -47,7 +47,7 @@ h2 {
 #tbl {
 	float: right;
 	font-size: 120%;
-	width: 22%;
+	width: 24%;
 	margin-right: 1.5cm;
 }
 
