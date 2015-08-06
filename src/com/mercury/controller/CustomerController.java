@@ -71,17 +71,17 @@ public class CustomerController {
 			e.printStackTrace();
 
 		}
-		if (set!=null){
+		if (set != null) {
 			list = new ArrayList<RequestInfo>(set);
 		}
-		Collections.sort(list,new Comparator<RequestInfo>() {
+		Collections.sort(list, new Comparator<RequestInfo>() {
 
 			@Override
 			public int compare(RequestInfo o1, RequestInfo o2) {
 				// TODO Auto-generated method stub
 				return -o1.getTs().toString().compareTo(o2.getTs().toString());
 			}
-			
+
 		});
 
 		JSONArray ja = new JSONArray(list);
@@ -104,27 +104,27 @@ public class CustomerController {
 			e.printStackTrace();
 
 		}
-		if (set!=null){
+		if (set != null) {
 			list = new ArrayList<StockInfo>(set);
-			Collections.sort(list, new Comparator<StockInfo>(){
+			Collections.sort(list, new Comparator<StockInfo>() {
 
 				@Override
 				public int compare(StockInfo first, StockInfo second) {
 					// TODO Auto-generated method stub
 					return first.getScode().compareTo(second.getScode());
 				}
-				
+
 			});
 		}
-		
+
 		JSONArray ja = new JSONArray(list);
 		mav.addObject("Requests", ja);
 		System.out.println(ja);
 		return mav;
 	}
 
-
-	@RequestMapping("/checkStock")//for test
+	@RequestMapping("/checkStock")
+	// for test
 	public ModelAndView checkStock(HttpServletRequest request) {
 
 		ModelAndView mav = new ModelAndView();
@@ -163,29 +163,30 @@ public class CustomerController {
 				.getAuthentication().getName();
 		User user = us.getUser(userName);
 		code = code.toUpperCase();
-		double price = ss.getStockInfoBCode(code).getCurrentPrice();
+
 		if (ss.getStockInfoBCode(code) == null) {
 			return "The Stock is NOT in the System";
 
-		} else if (amount * price > user.getBalance().doubleValue()) {
-			return "Your credit is NOT enough";
-
 		} else {
-			StockInfo stockInfo = ss.getStockInfoBCode(code);
-			stockInfo.setCurrentPrice(price);
-			try {
-				cs.requestExchange(stockInfo, user, amount);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return "Unable to add Transactions";
+			double price = ss.getStockInfoBCode(code).getCurrentPrice();
+			if (amount * price > user.getBalance().doubleValue()) {
+				return "Your credit is NOT enough";
+			} else {
+				StockInfo stockInfo = ss.getStockInfoBCode(code);
+				stockInfo.setCurrentPrice(price);
+				try {
+					cs.requestExchange(stockInfo, user, amount);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "Unable to add Transactions";
+				}
+				double balance = user.getBalance().doubleValue();
+				user.setBalance(new BigDecimal(balance - price * amount));
+				us.updateUser(user);
+				return "Transaction Added";
 			}
-			double balance = user.getBalance().doubleValue();
-			user.setBalance(new BigDecimal(balance - price * amount));
-			us.updateUser(user);
-			return "Transaction Added";
 		}
-
 	}
 
 	@RequestMapping(value = "/sellSub", method = RequestMethod.POST)
