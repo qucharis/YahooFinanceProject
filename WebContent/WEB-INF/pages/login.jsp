@@ -65,6 +65,9 @@ input.ng-invalid.ng-dirty{
 .col-md-4 {
 	color: red;
 }
+.col-md-8{
+	color: red;
+}
 body,html {
 	height:100%;
 	width:100%;

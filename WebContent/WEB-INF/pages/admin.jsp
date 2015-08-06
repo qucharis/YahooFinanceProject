@@ -130,37 +130,6 @@
 			<font color="green">Welcome back Admin</font>
 		</h1>
 
-		<!-- <div class="col-md-5">
-	<h3>Stock Add or Remove:</h3>
-	<table>
-		<tr>
-			<td>Stock Code: </td>
-			<td><input type="text" name="scode" id="scode1"/></td>
-		</tr>
-		<tr>
-			<td>Stock Name: </td>
-			<td><input type="text" name="stockName" id="stockName1"/></td>
-		</tr>
-		<tr>
-			<td><button id="clear1">Clear</button></td>
-			<td>
-				<button id="submit1" disabled>Add Stock</button>
-				<button id="submit2" disabled>Remove Stock</button>
-			</td>
-		</tr>
-	</table>
-	<h4 id = "para1" style="color:red">No message</h4>
-</div> -->
-
-<!-- 		<div id="#trans" ng-controller="mainController" class="col-md-5">
-			<div>
-				<button class="btn btn-primary" ng-click="parseTrans('result')">Parse
-					Requests</button>
-			</div>
-			<div>
-				<h1>{{parseStatus}}</h1>
-			</div>
-		</div> -->
 		<div class="panel-group" id="accordion">
 			<div class="panel panel-info">
 				<div class="panel-heading">
@@ -171,7 +140,7 @@
 				</div>
 				<div class="panel-collapse collapse" id="collapseOne" >
 					<div class="panel-body">
-						<table>
+						<table class="table table-striped">
 							<tr>
 								<td>Stock Code:</td>
 								<td><input type="text" name="scode" id="scode1" /></td>
@@ -181,10 +150,10 @@
 								<td><input type="text" name="stockName" id="stockName1" /></td>
 							</tr>
 							<tr>
-								<td><button id="clear1">Clear</button></td>
+								<td><button class="btn btn-warning" id="clear1">Clear</button></td>
 								<td>
-									<button id="submit1" disabled>Add Stock</button>
-									<button id="submit2" disabled>Remove Stock</button>
+									<button class="btn btn-primary" id="submit1" disabled>Add Stock</button>
+									<button class="btn btn-danger" id="submit2" disabled>Remove Stock</button>
 								</td>
 							</tr>
 						</table>
@@ -202,7 +171,7 @@
 				<div id="collapseTwo" class="panel-collapse collapse">
 					<div class="panel-body" ng-controller="mainController">
 						<div>
-							<button class="btn btn-primary" ng-click="parseTrans('result')">Parse
+							<button class="btn btn-success" ng-click="parseTrans('result')">Parse
 								Requests</button>
 						</div>
 						<div>
