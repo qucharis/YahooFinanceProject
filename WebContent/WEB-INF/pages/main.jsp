@@ -47,7 +47,7 @@ h2 {
 #tbl {
 	float: right;
 	font-size: 120%;
-	width: 22%;
+	width: 24%;
 	margin-right: 1.5cm;
 }
 
@@ -117,7 +117,7 @@ body {
 			amount : 0
 		};
 		$scope.isAmountValid = function() {
-			if ($scope.request.amount > 0 && $scope.request.amount < 1000000)
+			if ($scope.request.amount > 0 && $scope.request.amount <= 1000000)
 				return true;
 		};
 
@@ -395,6 +395,9 @@ body {
 	</div>
 
 
+	<h2>
+		<font>${ownershipInfo.message}</font>
+	</h2>
 
 	<div style="display: none">
 		<p id="remoteBalance">${balance}</p>
@@ -402,9 +405,6 @@ body {
 	</div>
 
 
-	<h2>
-		<font>${ownershipInfo.message}</font>
-	</h2>
 
 	<%-- <h3>Your Balance: ${balance} <span><button id="submit1">Add Money</button></span></h3> --%>
 	<table id="towns" ng-controller="displayController" width="200"
